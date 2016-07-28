@@ -1,0 +1,39 @@
+$blue : #00AEDB;
+$green : #8DC53E;
+$light-blue : #60C9E7;
+$dark-brown : #605C50;
+$grey : #7E7F81;
+
+nav.navbar.navbar-default {
+  background-color: $blue;
+  color: white;
+  border-radius: 0px;
+  border: none;
+}
+
+nav.navbar.navbar-default a {
+  color: white;
+}
+
+.navbar.navbar-default .navbar-nav > li > a {
+  font-size: 18px;
+  font-family: 'Josefin Sans', sans-serif;
+  color: white;
+}
+
+.navbar.navbar-default .navbar-nav > li > a:hover {
+  color: $grey;
+}
+
+.navbar-header .navbar-brand {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 25px;
+}
+
+
+
+nav.navbar.navbar-default .nav.navbar-nav > .active > a {
+  background-color: $blue;
+  color: $grey;
+}
