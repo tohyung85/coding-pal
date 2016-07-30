@@ -2,25 +2,25 @@ require 'rails_helper'
 
 RSpec.describe ProfilesController, type: :controller do
   let(:user){FactoryGirl.create(:user)}
+  let(:user2){FactoryGirl.create(:user)}
   let(:profile){FactoryGirl.create(:profile)}
   describe '#edit' do
     context 'user_signed in' do
+      before do 
+        sign_in user
+      end      
       render_views
       it 'should allow user to edit his profile page' do
-        sign_in user
         get :edit, id: user.id
         expect(response).to have_http_status(:success)
       end
 
       it 'should not allow user to edit another user profile' do
-        sign_in user
-        user2 = FactoryGirl.create(:user)
         get :edit, id: user2.id
         expect(response).to have_http_status(:unauthorized)
       end    
 
       it 'should return not found if user id is invalid' do
-        sign_in user
         get :edit, id: 'rpec test'
         expect(response).to have_http_status(:not_found)
       end
@@ -37,8 +37,10 @@ RSpec.describe ProfilesController, type: :controller do
 
   describe '#update' do
     context 'user_signed in' do
-      it 'should allow user to update his profile page' do
+      before do 
         sign_in user
+      end
+      it 'should allow user to update his profile page' do
         patch :update, id: user.id, profile: {
           user_name: 'John Doe'
         }      
@@ -48,8 +50,6 @@ RSpec.describe ProfilesController, type: :controller do
       end      
 
       it 'should not allow user to update another user profile' do
-        sign_in user
-        user2 = FactoryGirl.create(:user)
         patch :update, id: user2.id, profile: {
           user_name: 'John Doe'
         }
@@ -59,7 +59,6 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it 'should return not found if user id is invalid' do
-        sign_in user
         get :edit, id: 'rspec test'
         expect(response).to have_http_status(:not_found)
       end
