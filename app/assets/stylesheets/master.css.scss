@@ -11,3 +11,20 @@ h1, h2, h3 {
 body {
   font-family: 'Playfair Display', serif;
 }
+
+.page-contents {
+  font-family: 'Playfair Display', serif;
+}
+
+.page-contents h1, h2, h3{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+
+// Fix simple form adding form-control to even checkbox inputs
+.check_box input.form-control {
+  float: left;
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
