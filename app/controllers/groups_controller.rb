@@ -1,13 +1,13 @@
 class GroupsController < ApplicationController
   #before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :require_group_to_be_present, only: [:show, :edit, :update, :destroy]
+  before_action :require_authorized_for_action, only: [:edit, :update, :destroy]
   def index
     @groups = Group.all
   end
 
   def show
-    @group = Group.find_by_id(params[:id])
-    return render_not_found unless @group.present?
   end
 
   def new
@@ -24,32 +24,36 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find_by_id(params[:id])
-    return render_not_found unless @group.present?
-    return render_not_found(:unauthorized) if @group.user != current_user
   end
 
   def update
-    @group = Group.find_by_id(params[:id])
-    return render_not_found unless @group.present?
-    return render_not_found(:unauthorized) if @group.user != current_user
-    group_updated = @group.update_attributes(group_params)
+    group_updated = current_group.update_attributes(group_params)
     if group_updated
-      redirect_to group_path(@group)
+      redirect_to group_path(current_group)
     else
       return render :edit, status: :unprocessible_entity
     end
   end
 
   def destroy
-    @group = Group.find_by_id(params[:id])
-    return render_not_found unless @group.present?
-    return render_not_found(:unauthorized) if @group.user != current_user
-    @group.destroy
+    current_group.destroy
     redirect_to groups_path
   end
 
   private
+
+  def current_group
+    @group ||= Group.find_by_id(params[:id])
+  end
+
+  def require_group_to_be_present
+    return render_not_found unless current_group.present?
+  end
+
+  def require_authorized_for_action
+    return render_not_found(:unauthorized) if current_group.user != current_user    
+  end
+
   def group_params
     params.require(:group).permit(:name, :course, :remote, :commitment_hours)
   end
