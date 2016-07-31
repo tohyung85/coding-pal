@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   def index
     @groups = Group.all
   end
@@ -20,6 +20,16 @@ class GroupsController < ApplicationController
     else
       return render :new, status: :unprocessible_entity
     end
+  end
+
+  def edit
+    @group = Group.find_by_id(params[:id])
+    return render_not_found unless @group.present?
+    return render_not_found(:unauthorized) if @group.user != current_user
+  end
+
+  def update
+    
   end
 
   private

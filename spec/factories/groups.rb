@@ -6,5 +6,6 @@ FactoryGirl.define do
     remote true
     course 'Firehose Project'
     commitment_hours 20
+    association :user
   end
 end

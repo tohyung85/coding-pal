@@ -94,15 +94,30 @@ RSpec.describe GroupsController, type: :controller do
   describe '#edit' do
     render_views
     context 'user signed in' do
+      before do 
+        sign_in group.user
+      end
       it 'should allow user to edit group if he is the owner' do
+        get :edit, id: group.id
+        expect(response).to have_http_status(:success)
       end
 
       it 'should return unauthorized if user is not the owner of the group' do
+        sign_in user
+        get :edit, id: group.id
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return 404 error if id not found' do
+        get :edit, id: 'woot'
+        expect(response).to have_http_status(:not_found)
       end
     end
 
     context 'user not signed in' do
       it 'should redirect user to sign in page' do
+        get :edit, id: group.id
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -115,6 +130,9 @@ RSpec.describe GroupsController, type: :controller do
 
       it 'should not allow user to update the group if he is not the owner' do
       end
+
+      it 'should validate inputs' do
+      end            
     end
 
     context 'user not signed in' do
