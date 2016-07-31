@@ -20,6 +20,14 @@ body {
   font-family: 'Josefin Sans', sans-serif;
 }
 
+.navbar {
+  margin: 0px;
+}
+
+body p.alert {
+  margin: 0px;
+  border-radius: 0px;
+}
 
 // Fix simple form adding form-control to even checkbox inputs
 .check_box input.form-control {
