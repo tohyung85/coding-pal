@@ -1,7 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
   def show
-    
   end
 
   def edit
@@ -12,13 +11,12 @@ class ProfilesController < ApplicationController
     else
       render_not_found(:unauthorized)
     end
-
   end
 
   def update
     user = User.find_by_id(params[:id])
     return render_not_found unless user.present?
-    if current_user.id == user.id 
+    if current_user.id == user.id
       user.profile.update_attributes(profile_params)
       redirect_to edit_profile_path
     else
