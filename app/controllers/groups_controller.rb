@@ -29,7 +29,15 @@ class GroupsController < ApplicationController
   end
 
   def update
-    
+    @group = Group.find_by_id(params[:id])
+    return render_not_found unless @group.present?
+    return render_not_found(:unauthorized) if @group.user != current_user
+    group_updated = @group.update_attributes(group_params)
+    if group_updated
+      redirect_to group_path(@group)
+    else
+      return render :edit, status: :unprocessible_entity
+    end
   end
 
   private

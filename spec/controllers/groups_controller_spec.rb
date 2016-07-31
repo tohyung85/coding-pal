@@ -125,18 +125,47 @@ RSpec.describe GroupsController, type: :controller do
   describe '#update' do
     render_views
     context 'user signed in' do
+      before do
+        sign_in group.user
+      end
       it 'should allow user to update the group if he is the owner' do
+        patch :update, id: group.id, group: {
+          name: 'Updated group name'
+        }
+        group.reload
+        expect(group.name).to eq ('Updated group name')
+        expect(response).to redirect_to group_path(group)
       end
 
       it 'should not allow user to update the group if he is not the owner' do
+        sign_in user
+        expect{patch :update, id: group.id, group: {
+          name: 'Bad group name'
+        }}.not_to change {group.reload.name}
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return 404 not found if group does not exist' do
+        patch :update, id: 'woot', group: {
+          name: 'Unfound Group name'
+        }
+        expect(response).to have_http_status(:not_found)
       end
 
       it 'should validate inputs' do
+        expect{ patch :update, id: group.id, group: {
+          name: 'GN'
+        }}.not_to change {group.reload.name}
+        expect(response).to render_template(:edit)
       end            
     end
 
     context 'user not signed in' do
       it 'should not allow user to update the group and redirect to sign in page' do
+        expect { patch :update, id: group.id, group: {
+          name: 'User not signed in group name'
+        }}.not_to change {group.reload.name}
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -144,7 +173,11 @@ RSpec.describe GroupsController, type: :controller do
   describe '#destroy' do
     render_views
     context 'user signed in' do
+      before do
+        sign_in group.user
+      end
       it 'should allow user to delete group if he is the owner' do
+
       end
 
       it 'should not allow user to delete the group if he is not the owner' do
