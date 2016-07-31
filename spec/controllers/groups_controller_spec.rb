@@ -19,9 +19,35 @@ RSpec.describe GroupsController, type: :controller do
     render_views
     context 'user signed in or not' do
       it 'should allow user to view group details' do
+        get :show, id: group.id
+        expect(response).to have_http_status(:success)
       end
     end
   end  
+
+  describe '#new' do
+    render_views
+    context 'user signed in' do
+      it 'should allow user to access page to create group' do
+      end
+    end
+
+    context 'user not signed in' do
+      it 'should redirect user to sign in page' do
+      end
+    end
+  end
+
+  describe '#create' do
+    render_views
+    context 'user signed in' do
+      it 'should allow user to create a group' do
+      end
+
+      it 'should not allow user to create a group' do
+      end
+    end
+  end
 
   describe '#edit' do
     render_views
@@ -34,8 +60,7 @@ RSpec.describe GroupsController, type: :controller do
     end
 
     context 'user not signed in' do
-      it 'should not allow user to edit group and redirect to sign in page' do
-
+      it 'should redirect user to sign in page' do
       end
     end
   end
