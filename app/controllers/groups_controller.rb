@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  #before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @groups = Group.all
   end
@@ -40,8 +41,15 @@ class GroupsController < ApplicationController
     end
   end
 
-  private
+  def destroy
+    @group = Group.find_by_id(params[:id])
+    return render_not_found unless @group.present?
+    return render_not_found(:unauthorized) if @group.user != current_user
+    @group.destroy
+    redirect_to groups_path
+  end
 
+  private
   def group_params
     params.require(:group).permit(:name, :course, :remote, :commitment_hours)
   end

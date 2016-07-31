@@ -177,15 +177,27 @@ RSpec.describe GroupsController, type: :controller do
         sign_in group.user
       end
       it 'should allow user to delete group if he is the owner' do
-
+        expect{ delete :destroy, id: group.id }.to change {Group.count}.by(-1)
+        expect(response).to redirect_to groups_path
       end
 
       it 'should not allow user to delete the group if he is not the owner' do
+        sign_in user
+        expect {delete :destroy, id: group.id}.not_to change {Group.count}
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return 404 error if not found' do
+        delete :destroy, id: 'woot'
+        expect(response).to have_http_status(:not_found)
       end
     end
 
     context 'user not signed in' do
       it 'should not allow user to delete the group and redirect user to sign in page' do
+        group #will need to create or next line will increase group count
+        expect {delete :destroy, id: group.id}.not_to change {Group.count}
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
