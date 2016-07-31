@@ -35,9 +35,6 @@ gem 'simple_form'
 # Devise gem
 gem 'devise', '>= 3.2.4'
 
-# Rubocop
-gem 'rubocop', '~> 0.42.0', require: false
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -61,4 +58,8 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Rubocop
+  gem 'rubocop', '~> 0.42.0', require: false
+  
 end
