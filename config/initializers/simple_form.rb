@@ -7,8 +7,7 @@ SimpleForm.setup do |config|
   # whole input.
   config.input_class = 'form-control'
 
-  config.wrappers :checkbox, tag: :div, class: "checkbox", error_class: "has-error" do |b|
-
+  config.wrappers :checkbox, tag: :div, class: 'checkbox', error_class: 'has-error' do |b|
     # Form extensions
     b.use :html5
 
@@ -18,18 +17,17 @@ SimpleForm.setup do |config|
       ba.use :label_text
     end
 
-    b.use :hint,  wrap_with: { tag: :p, class: "help-block" }
-    b.use :error, wrap_with: { tag: :span, class: "help-block text-danger" }
-  end  
-
+    b.use :hint,  wrap_with: { tag: :p, class: 'help-block' }
+    b.use :error, wrap_with: { tag: :span, class: 'help-block text-danger' }
+  end
 
   config.wrappers :default, class: :input,
-    hint_class: :field_with_hint, error_class: :field_with_errors do |b|
+                            hint_class: :field_with_hint, error_class: :field_with_errors do |b|
     ## Extensions enabled by default
     # Any of these extensions can be disabled for a
     # given input by passing: `f.input EXTENSION_NAME => false`.
     # You can make any of these extensions optional by
-    # renaming `b.use` to `b.optional`.    
+    # renaming `b.use` to `b.optional`.
     # Determines whether to use HTML5 (:email, :url, ...)
     # and required attributes
 
