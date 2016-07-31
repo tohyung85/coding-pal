@@ -1,5 +1,4 @@
 class GroupsController < ApplicationController
-  #before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :require_group_to_be_present, only: [:show, :edit, :update, :destroy]
   before_action :require_authorized_for_action, only: [:edit, :update, :destroy]
@@ -16,11 +15,8 @@ class GroupsController < ApplicationController
 
   def create
     @group = current_user.groups.create(group_params)
-    if @group.valid? 
-      redirect_to group_path(@group)
-    else
-      return render :new, status: :unprocessible_entity
-    end
+    return render :new, status: :unprocessible_entity unless @group.valid?
+    redirect_to group_path(@group)
   end
 
   def edit
@@ -28,11 +24,8 @@ class GroupsController < ApplicationController
 
   def update
     group_updated = current_group.update_attributes(group_params)
-    if group_updated
-      redirect_to group_path(current_group)
-    else
-      return render :edit, status: :unprocessible_entity
-    end
+    return render :edit, status: :unprocessible_entity unless group_updated
+    redirect_to group_path(current_group)
   end
 
   def destroy
@@ -51,7 +44,7 @@ class GroupsController < ApplicationController
   end
 
   def require_authorized_for_action
-    return render_not_found(:unauthorized) if current_group.user != current_user    
+    return render_not_found(:unauthorized) if current_group.user != current_user
   end
 
   def group_params

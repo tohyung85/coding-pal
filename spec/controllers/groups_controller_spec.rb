@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe GroupsController, type: :controller do
-  let(:user) {FactoryGirl.create(:user)}
-  let(:user1) {FactoryGirl.create(:user)}
-  let(:profile) {FactoryGirl.create(:profile)}
-  let(:group) {FactoryGirl.create(:group)}
+  let(:user) { FactoryGirl.create(:user) }
+  let(:user1) { FactoryGirl.create(:user) }
+  let(:profile) { FactoryGirl.create(:profile) }
+  let(:group) { FactoryGirl.create(:group) }
   describe '#index' do
     render_views
     context 'user signed in or not' do
@@ -27,9 +27,8 @@ RSpec.describe GroupsController, type: :controller do
         get :show, id: 'woot'
         expect(response).to have_http_status(:not_found)
       end
-
     end
-  end  
+  end
 
   describe '#new' do
     render_views
@@ -56,35 +55,41 @@ RSpec.describe GroupsController, type: :controller do
         sign_in user
       end
       it 'should allow user to create a group' do
-        expect{post :create, group: {
-          name: 'Test group',
-          remote: true,
-          course: 'Firehose',
-          commitment_hours: 10
-          }}.to change{Group.count}.by(1)
+        expect do
+          post :create, group: {
+            name: 'Test group',
+            remote: true,
+            course: 'Firehose',
+            commitment_hours: 10
+          }
+        end.to change { Group.count }.by(1)
         expect(Group.last.user_id).to eq(user.id)
         expect(response).to redirect_to group_path(Group.last.id)
       end
 
       it 'should validate inputs' do
-        expect{post :create, group: {
-          name: '',
-          remote: true,
-          course: 'Firehose',
-          commitment_hours: 10
-          }}.not_to change{Group.count}
+        expect do
+          post :create, group: {
+            name: '',
+            remote: true,
+            course: 'Firehose',
+            commitment_hours: 10
+          }
+        end.not_to change { Group.count }
         expect(response).to render_template(:new)
       end
     end
 
     context 'user not signed in' do
       it 'should not allow user to create a group' do
-        expect{post :create, group: {
-          name: 'Test Group',
-          remote: true,
-          course: 'Firehose',
-          commitment_hours: 10
-          }}.not_to change{Group.count}
+        expect do
+          post :create, group: {
+            name: 'Test Group',
+            remote: true,
+            course: 'Firehose',
+            commitment_hours: 10
+          }
+        end.not_to change { Group.count }
 
         expect(response).to redirect_to new_user_session_path
       end
@@ -94,7 +99,7 @@ RSpec.describe GroupsController, type: :controller do
   describe '#edit' do
     render_views
     context 'user signed in' do
-      before do 
+      before do
         sign_in group.user
       end
       it 'should allow user to edit group if he is the owner' do
@@ -133,15 +138,17 @@ RSpec.describe GroupsController, type: :controller do
           name: 'Updated group name'
         }
         group.reload
-        expect(group.name).to eq ('Updated group name')
+        expect(group.name).to eq 'Updated group name'
         expect(response).to redirect_to group_path(group)
       end
 
       it 'should not allow user to update the group if he is not the owner' do
         sign_in user
-        expect{patch :update, id: group.id, group: {
-          name: 'Bad group name'
-        }}.not_to change {group.reload.name}
+        expect do
+          patch :update, id: group.id, group: {
+            name: 'Bad group name'
+          }
+        end.not_to change { group.reload.name }
         expect(response).to have_http_status(:unauthorized)
       end
 
@@ -153,18 +160,22 @@ RSpec.describe GroupsController, type: :controller do
       end
 
       it 'should validate inputs' do
-        expect{ patch :update, id: group.id, group: {
-          name: 'GN'
-        }}.not_to change {group.reload.name}
+        expect do
+          patch :update, id: group.id, group: {
+            name: 'GN'
+          }
+        end.not_to change { group.reload.name }
         expect(response).to render_template(:edit)
-      end            
+      end
     end
 
     context 'user not signed in' do
       it 'should not allow user to update the group and redirect to sign in page' do
-        expect { patch :update, id: group.id, group: {
-          name: 'User not signed in group name'
-        }}.not_to change {group.reload.name}
+        expect do
+          patch :update, id: group.id, group: {
+            name: 'User not signed in group name'
+          }
+        end.not_to change { group.reload.name }
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -177,13 +188,13 @@ RSpec.describe GroupsController, type: :controller do
         sign_in group.user
       end
       it 'should allow user to delete group if he is the owner' do
-        expect{ delete :destroy, id: group.id }.to change {Group.count}.by(-1)
+        expect { delete :destroy, id: group.id }.to change { Group.count }.by(-1)
         expect(response).to redirect_to groups_path
       end
 
       it 'should not allow user to delete the group if he is not the owner' do
         sign_in user
-        expect {delete :destroy, id: group.id}.not_to change {Group.count}
+        expect { delete :destroy, id: group.id }.not_to change { Group.count }
         expect(response).to have_http_status(:unauthorized)
       end
 
@@ -195,11 +206,10 @@ RSpec.describe GroupsController, type: :controller do
 
     context 'user not signed in' do
       it 'should not allow user to delete the group and redirect user to sign in page' do
-        group #will need to create or next line will increase group count
-        expect {delete :destroy, id: group.id}.not_to change {Group.count}
+        group # will need to create or next line will increase group count
+        expect { delete :destroy, id: group.id }.not_to change { Group.count }
         expect(response).to redirect_to new_user_session_path
       end
     end
   end
-
 end
