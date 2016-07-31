@@ -22,6 +22,12 @@ RSpec.describe GroupsController, type: :controller do
         get :show, id: group.id
         expect(response).to have_http_status(:success)
       end
+
+      it 'should show a 404 error if incorrect id is given' do
+        get :show, id: 'woot'
+        expect(response).to have_http_status(:not_found)
+      end
+
     end
   end  
 
@@ -29,11 +35,16 @@ RSpec.describe GroupsController, type: :controller do
     render_views
     context 'user signed in' do
       it 'should allow user to access page to create group' do
+        sign_in user
+        get :new
+        expect(response).to have_http_status(:success)
       end
     end
 
     context 'user not signed in' do
       it 'should redirect user to sign in page' do
+        get :new
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
@@ -41,10 +52,41 @@ RSpec.describe GroupsController, type: :controller do
   describe '#create' do
     render_views
     context 'user signed in' do
+      before do
+        sign_in user
+      end
       it 'should allow user to create a group' do
+        expect{post :create, group: {
+          name: 'Test group',
+          remote: true,
+          course: 'Firehose',
+          commitment_hours: 10
+          }}.to change{Group.count}.by(1)
+        expect(Group.last.user_id).to eq(user.id)
+        expect(response).to redirect_to group_path(Group.last.id)
       end
 
+      it 'should validate inputs' do
+        expect{post :create, group: {
+          name: '',
+          remote: true,
+          course: 'Firehose',
+          commitment_hours: 10
+          }}.not_to change{Group.count}
+        expect(response).to render_template(:new)
+      end
+    end
+
+    context 'user not signed in' do
       it 'should not allow user to create a group' do
+        expect{post :create, group: {
+          name: 'Test Group',
+          remote: true,
+          course: 'Firehose',
+          commitment_hours: 10
+          }}.not_to change{Group.count}
+
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
