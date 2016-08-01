@@ -1,0 +1,13 @@
+.groups-index-contents-inner {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.group-box {
+  border: 1px solid grey;
+  border-radius: 10px;
+  width: 300px;
+  margin: 30px;
+}
