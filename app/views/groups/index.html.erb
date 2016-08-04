@@ -3,7 +3,11 @@
     <% @groups.each do |group| %>
       <div class='group-box'>
         <div class='group-front'>
-          <%= image_tag('http://placehold.it/300x200', class: 'group-image')%>
+          <% if group.image.present? %>
+            <%= image_tag(group.image, class: 'group-image')%>
+          <% else %>
+            <%= image_tag('coverimage.jpg', class: 'group-image') %>
+          <% end %>
           <div class='group-contents'>
             <div class='group-heading'>
               <h1><%= group.name %></h1>
