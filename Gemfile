@@ -39,6 +39,8 @@ gem 'devise', '>= 3.2.4'
 gem 'carrierwave'
 # Carrierwave aws
 gem 'carrierwave-aws'
+# Minimagick gem
+gem 'mini_magick', '~> 4.3.1'
 
 # Figaro gem
 gem 'figaro'
