@@ -3,7 +3,8 @@ $green : #8DC53E;
 $light-blue : #60C9E7;
 $dark-brown : #605C50;
 $grey : #7E7F81;
-
+$footer-height: 60px;
+$footer-height-mobile:60px;
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -20,13 +21,13 @@ body {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  height: $footer-height;
   background-color: $blue;
   color: $dark-brown;
   display: flex;
   justify-content: center;
   padding: 0;
-  margin: 0;
+  margin: -$footer-height;
   border-radius:0px;
 }
 
