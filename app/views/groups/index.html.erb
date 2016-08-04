@@ -3,37 +3,47 @@
     <% @groups.each do |group| %>
       <div class='group-box'>
         <div class='group-front'>
-          <%= image_tag('http://placehold.it/300x150', class: 'group-image')%>
-          <div class='group-heading'>
-            <h1><%= group.name %></h1>
-            <h3><%= group.course %></h3>
-          </div>
-          <div class='group-prereq'>
-            <p>Country: Singapore</p>
-            <p>Commitment per week: <%= group.commitment_hours%>hrs</p>
-            <p>
-              <% if group.remote == true %>
-                Remote members welcome
-              <% else %>
-                Local members only
-              <% end %>
-            </p>
-          </div>
-          <div class='group-details'>
-            Members: <%= image_tag('http://placehold.it/50x50', class: 'group-members-image')%>
-            <p>This is a group description...yada yada yada</p>
+          <%= image_tag('http://placehold.it/300x200', class: 'group-image')%>
+          <div class='group-contents'>
+            <div class='group-heading'>
+              <h1><%= group.name %></h1>
+              <p>is working on..</p>
+              <h3><%= group.course %></h3>
+            </div>
+            <div class='group-details'>
+              <br/>
+              Members: <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+              <br/>
+              <p class='group-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>            
           </div>
         </div>
 
         <div class='group-back hidden'>
-          <%= image_tag('http://placehold.it/300x150', class: 'group-image')%>
-          <div class='group-heading'>
-            <h1><%= group.name %></h1>
-            <h3><%= group.course %></h3>
-          </div>
-          <div class='group-details'>
-            Members: <%= image_tag('http://placehold.it/50x50', class: 'group-members-image')%>
-            <p>This is a group description...yada yada yada</p>
+          <div class='group-contents'>
+            <div class='group-heading'>
+              <h1><%= group.name %></h1>
+              <p>is working on..</p>
+              <h3><%= group.course %></h3>
+            </div>
+            <div class='group-prereq'>
+              <p>Country: Singapore</p>
+              <p>Commitment per week: <%= group.commitment_hours%>hrs</p>
+              <p>
+                <% if group.remote == true %>
+                  Remote members welcome
+                <% else %>
+                  Local members only
+                <% end %>
+              </p>
+            </div>                        
+            <div class='group-details'>
+              <br/>
+              Members: <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+              <br/>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+
           </div>
         </div>
       </div>
