@@ -25,6 +25,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:user_name, :remote_ok?)
+    params.require(:profile).permit(:user_name, :remote_ok?, :avatar)
   end
 end
