@@ -17,7 +17,7 @@ class GroupsController < ApplicationController
     @group = current_user.groups.create(group_params)
     return render :new, status: :unprocessible_entity unless @group.valid?
     #redirect_to group_path(@group)
-    #redirect_to groups_path
+    redirect_to groups_path
   end
 
   def edit
@@ -50,6 +50,6 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :course, :remote, :commitment_hours, :image)
+    params.require(:group).permit(:name, :course, :remote, :commitment_hours, :image, :description)
   end
 end
