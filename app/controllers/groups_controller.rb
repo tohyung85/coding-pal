@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
   def create
     @group = current_user.groups.create(group_params)
     return render :new, status: :unprocessible_entity unless @group.valid?
-    #redirect_to group_path(@group)
+    # redirect_to group_path(@group)
     redirect_to groups_path
   end
 
@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
     group_updated = current_group.update_attributes(group_params)
     return render :edit, status: :unprocessible_entity unless group_updated
     redirect_to group_path(current_group)
-    #redirect_to groups_path
+    # redirect_to groups_path
   end
 
   def destroy
