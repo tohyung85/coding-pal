@@ -60,11 +60,12 @@ RSpec.describe GroupsController, type: :controller do
             name: 'Test group',
             remote: true,
             course: 'Firehose',
+            description: 'this is a test group',
             commitment_hours: 10
           }
         end.to change { Group.count }.by(1)
         expect(Group.last.user_id).to eq(user.id)
-        expect(response).to redirect_to group_path(Group.last.id)
+        expect(response).to redirect_to groups_path
       end
 
       it 'should validate inputs' do
