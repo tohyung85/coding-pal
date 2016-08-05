@@ -1,0 +1,41 @@
+$blue : #00AEDB;
+$green : #8DC53E;
+$light-blue : #60C9E7;
+$dark-brown : #605C50;
+$grey : #7E7F81;
+
+.group-display-image {
+  height: auto;
+  width: 100%;
+}
+
+.group-owner-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+}
+
+.group-owner {
+  display: flex;
+}
+
+.group-owner-details {
+  margin-left: 30px;
+}
+
+.group-heading, .group-details, .group-owner {
+  border-bottom: 1px solid #cccccc;
+  padding: 20px;
+}
+
+.group-details h3 {
+  margin-top: 0px;
+}
+
+.current-group-contents h1 {
+  color: $dark-brown;
+}
+
+.current-group-contents h2 {
+  color: $green;
+}

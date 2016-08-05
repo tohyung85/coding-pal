@@ -37,6 +37,7 @@ class GroupsController < ApplicationController
 
   private
 
+  helper_method :current_group
   def current_group
     @group ||= Group.find_by_id(params[:id])
   end
