@@ -15,7 +15,7 @@ $grey : #7E7F81;
   border-radius: 100%;
 }
 
-.group-owner {
+.individual-group-owner {
   display: flex;
 }
 
@@ -23,12 +23,12 @@ $grey : #7E7F81;
   margin-left: 30px;
 }
 
-.group-heading, .group-details, .group-owner {
+.individual-group-heading, .individual-group-details, .individual-group-owner {
   border-bottom: 1px solid #cccccc;
   padding: 20px;
 }
 
-.group-description {
+.individual-group-description {
   padding: 20px;  
 }
 
@@ -36,7 +36,7 @@ $grey : #7E7F81;
   margin-left: 20px;
 }
 
-.group-details h3 {
+.individual-group-details h3 {
   margin-top: 0px;
 }
 

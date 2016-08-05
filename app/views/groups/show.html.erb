@@ -1,6 +1,6 @@
 <div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12'>
   <div class='current-group-contents'>
-    <div class='group-heading'>
+    <div class='individual-group-heading'>
     <br/>
       <% if current_group.image.present? %>
         <%= image_tag current_group.image, class: 'group-display-image' %>
@@ -13,7 +13,7 @@
       <p>is working on...</p>
       <h2><%= current_group.course %></h2>
     </div>
-    <div class='group-details'>
+    <div class='individual-group-details'>
       <h3>Group Details</h3>
       <p>Commitment per week: <%= current_group.commitment_hours %> hours</p>
       <% if current_group.remote.present? %>
@@ -22,14 +22,14 @@
         <p>Local learners please</p>
       <% end %>
     </div>
-    <div class='group-owner'>
+    <div class='individual-group-owner'>
       <%= image_tag current_group.user.profile.avatar, class: 'group-owner-avatar' %>
       <div class='group-owner-details'>
         <h4><%= current_group.user.profile.user_name %></h4>
         <p><%= current_group.user.profile.description %></p>
       </div>
     </div>
-    <div class='group-description'>
+    <div class='individual-group-description'>
       <h3>Group Description</h3>
       <p><%= current_group.description%></p>
     </div>

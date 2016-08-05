@@ -25,6 +25,15 @@ $grey : #7E7F81;
   border: none;
 }
 
+.group-box-link:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.group-box-link {
+  color: black;
+}
+
 .group-image {
   border-radius: 5px 5px 0px 0px;
   width: 300px;
