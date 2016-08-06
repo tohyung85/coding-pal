@@ -16,15 +16,18 @@
               <h3><%= group.course %></h3>
             </div>
             <div class='group-details'>
-              <br/>
-              Members: 
-              <% group.members.each do |member| %>
-                <% if member.profile.avatar.present? %>
-                  <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
-                <% else %>
-                  <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+              <div class='group-members'>
+                Members: 
+                <% group.members.each do |member| %>
+                  <%= link_to profile_path(member.profile), class: 'group-members-profile-link' do %>
+                    <% if member.profile.avatar.present? %>
+                      <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+                    <% else %>
+                      <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+                    <% end %>      
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
               <br/>
               <p class='group-description'><%= group.description%></p>
             </div>            
@@ -51,14 +54,18 @@
             </div>                        
             <div class='group-details'>
               <br/>
-              Members: 
-              <% group.members.each do |member| %>
-                <% if member.profile.avatar.present? %>
-                  <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
-                <% else %>
-                  <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+              <div class='group-members'>
+                Members: 
+                <% group.members.each do |member| %>
+                  <%= link_to profile_path(member.profile), class: 'group-members-profile-link' do %>
+                    <% if member.profile.avatar.present? %>
+                      <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+                    <% else %>
+                      <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+                    <% end %>      
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
               <br/>
               <p class='group-description'><%= group.description%></p>
             </div>
