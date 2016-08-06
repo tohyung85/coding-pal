@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805132820) do
+ActiveRecord::Schema.define(version: 20160806051015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "enrollments", ["group_id"], name: "index_enrollments_on_group_id", using: :btree
+  add_index "enrollments", ["user_id", "group_id"], name: "index_enrollments_on_user_id_and_group_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"

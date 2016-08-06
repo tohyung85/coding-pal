@@ -21,6 +21,18 @@
       <% else %>
         <p>Local learners please</p>
       <% end %>
+      <div class='group-members'>
+        Members: 
+        <% current_group.members.each do |member| %>
+          <%= link_to profile_path(member.profile), class: 'group-members-profile-link' do %>
+            <% if member.profile.avatar.present? %>
+              <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+            <% else %>
+              <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+            <% end %>      
+          <% end %>
+        <% end %>
+      </div>
     </div>
     <div class='individual-group-owner'>
       <%= image_tag current_group.user.profile.avatar, class: 'group-owner-avatar' %>
@@ -33,8 +45,9 @@
       <h3>Group Description</h3>
       <p><%= current_group.description%></p>
     </div>
-
-    <%= link_to 'Request to Join', '#', class: 'btn btn-success join-button' %>
+    <% if current_user.present? && current_group.members.find_by_id(current_user.id).nil? %>
+      <%= link_to 'Request to Join', group_enrollments_path(current_group), method: :post, class: 'btn btn-success join-button' %>
+    <% end %>
 
     <% if current_group.user == current_user %>
       <%= link_to 'Edit Group Details',edit_group_path(current_group), class: 'btn btn-primary' %>

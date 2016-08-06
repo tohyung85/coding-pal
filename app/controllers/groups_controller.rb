@@ -17,6 +17,7 @@ class GroupsController < ApplicationController
     @group = current_user.groups.create(group_params)
     return render :new, status: :unprocessible_entity unless @group.valid?
     # redirect_to group_path(@group)
+    @group.enrollments.create(user_id: current_user.id)
     redirect_to groups_path
   end
 
