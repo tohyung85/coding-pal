@@ -17,7 +17,14 @@
             </div>
             <div class='group-details'>
               <br/>
-              Members: <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+              Members: 
+              <% group.members.each do |member| %>
+                <% if member.profile.avatar.present? %>
+                  <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+                <% else %>
+                  <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+                <% end %>
+              <% end %>
               <br/>
               <p class='group-description'><%= group.description%></p>
             </div>            
@@ -44,7 +51,14 @@
             </div>                        
             <div class='group-details'>
               <br/>
-              Members: <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+              Members: 
+              <% group.members.each do |member| %>
+                <% if member.profile.avatar.present? %>
+                  <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+                <% else %>
+                  <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+                <% end %>
+              <% end %>
               <br/>
               <p class='group-description'><%= group.description%></p>
             </div>

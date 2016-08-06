@@ -21,6 +21,14 @@
       <% else %>
         <p>Local learners please</p>
       <% end %>
+      Members: 
+        <% current_group.members.each do |member| %>
+          <% if member.profile.avatar.present? %>
+            <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+          <% else %>
+            <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+          <% end %>      
+        <% end %>
     </div>
     <div class='individual-group-owner'>
       <%= image_tag current_group.user.profile.avatar, class: 'group-owner-avatar' %>
