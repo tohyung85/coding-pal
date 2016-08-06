@@ -64,7 +64,8 @@ RSpec.describe GroupsController, type: :controller do
             commitment_hours: 10
           }
         end.to change { Group.count }.by(1)
-        expect(Group.last.user_id).to eq(user.id)
+        expect(Group.last.members.last).to eq user
+        expect(Group.last.user_id).to eq user.id
         expect(response).to redirect_to groups_path
       end
 
