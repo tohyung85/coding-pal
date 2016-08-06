@@ -4,6 +4,22 @@ RSpec.describe ProfilesController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user) }
   let(:profile) { FactoryGirl.create(:profile) }
+  describe '#show' do
+    context 'user signed in or not' do
+      render_views
+      it 'should display page' do
+        get :show, id: user.id
+        
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'should return not found if user not found' do
+        get :show, id: 'someguy'
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
   describe '#edit' do
     context 'user_signed in' do
       before do
@@ -12,16 +28,19 @@ RSpec.describe ProfilesController, type: :controller do
       render_views
       it 'should allow user to edit his profile page' do
         get :edit, id: user.id
+        
         expect(response).to have_http_status(:success)
       end
 
       it 'should not allow user to edit another user profile' do
         get :edit, id: user2.id
+        
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'should return not found if user id is invalid' do
         get :edit, id: 'rpec test'
+        
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -30,6 +49,7 @@ RSpec.describe ProfilesController, type: :controller do
       render_views
       it 'should not allow a user who is not signed in to access edit page' do
         get :edit, id: 123
+
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -44,7 +64,9 @@ RSpec.describe ProfilesController, type: :controller do
         patch :update, id: user.id, profile: {
           user_name: 'John Doe'
         }
+
         user.profile.reload
+
         expect(user.profile.user_name).to eq('John Doe')
         expect(response).to redirect_to edit_profile_path
       end
@@ -53,13 +75,16 @@ RSpec.describe ProfilesController, type: :controller do
         patch :update, id: user2.id, profile: {
           user_name: 'John Doe'
         }
+
         user2.profile.reload
+
         expect(user2.profile.user_name).to eq 'my username'
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'should return not found if user id is invalid' do
         get :edit, id: 'rspec test'
+
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -68,6 +93,7 @@ RSpec.describe ProfilesController, type: :controller do
       render_views
       it 'should not allow a user who is not signed in to access edit page' do
         get :edit, id: 123
+        
         expect(response).to redirect_to new_user_session_path
       end
     end
