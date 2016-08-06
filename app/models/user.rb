@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_one :profile
   has_many :groups
+  has_many :enrollments
+  has_many :enrolled_groups, through: :enrollments, source: :group
 
   after_create :profile_creation
 
