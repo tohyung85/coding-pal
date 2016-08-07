@@ -81,9 +81,11 @@ RSpec.describe JoinRequestsController, type: :controller do
       end
 
       it 'should allow group owner to destroy or reject join request' do
-      end
+        expect do
+          delete :destroy, id: request.id
+        end.to change { JoinRequest.count }.by -1
 
-      it 'should allow group owner to destroy join request and enroll requestor' do
+        expect(response).to redirect_to group_path(request.group)
       end
     end
 
@@ -93,6 +95,55 @@ RSpec.describe JoinRequestsController, type: :controller do
 
         expect do
           delete :destroy, id: request.id
+        end.to_not change { JoinRequest.count }
+
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe '#enroll' do
+    context 'group owner signed in' do
+      before do
+        sign_in request.group.user
+      end
+
+      it 'should allow owner to enroll requestor' do
+        expect do
+          delete :enroll, join_request_id: request.id
+        end.to change { JoinRequest.count }.by -1
+
+        expect(request.group.members.find_by_id(request.requestor.id)).to_not eq nil
+        expect(response).to redirect_to group_path(request.group)
+      end
+
+      it 'should not allow non-owner to enroll requestor' do
+        sign_in user
+
+        expect do
+          delete :enroll, join_request_id: request.id
+        end.to_not change { JoinRequest.count }
+
+        expect(request.group.members.find_by_id(request.requestor.id)).to eq nil
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'should return 404 error if request not found' do
+        expect do
+          delete :enroll, join_request_id: 'someID'
+        end.to_not change { JoinRequest.count }
+
+        expect(request.group.members.find_by_id(request.requestor.id)).to eq nil
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'no user sign in' do
+      it 'should redirect user to sign in page' do
+        request
+
+        expect do
+          delete :enroll, join_request_id: request.id
         end.to_not change { JoinRequest.count }
 
         expect(response).to redirect_to new_user_session_path

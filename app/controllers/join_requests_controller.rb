@@ -12,10 +12,19 @@ class JoinRequestsController < ApplicationController
   def destroy
     request = JoinRequest.find_by_id(params[:id])
     return render_not_found unless request.present?
-    return render_not_found(:unauthorized) unless request.requestor == current_user
+    return render_not_found(:unauthorized) unless request.requestor == current_user || request.group.user == current_user
 
     group = request.group
     request.destroy
     redirect_to group_path(group)
+  end
+
+  def enroll
+    request = JoinRequest.find_by_id(params[:join_request_id])
+    return render_not_found unless request.present?
+    return render_not_found(:unauthorized) unless request.group.user == current_user
+    request.group.enrollments.create(user_id: request.requestor.id)
+    request.destroy
+    redirect_to group_path(request.group)
   end
 end
