@@ -50,6 +50,10 @@
     <% end %>
 
     <% if current_group.user == current_user %>
+      <div class='group-requests'>
+        <h3>Group Requests</h3>
+      </div>
+
       <%= link_to 'Edit Group Details',edit_group_path(current_group), class: 'btn btn-primary' %>
     <% end %>
       
