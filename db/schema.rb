@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806051015) do
+ActiveRecord::Schema.define(version: 20160807082711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20160806051015) do
   end
 
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
+  create_table "join_requests", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "requestor_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "join_requests", ["group_id"], name: "index_join_requests_on_group_id", using: :btree
+  add_index "join_requests", ["requestor_id", "group_id"], name: "index_join_requests_on_requestor_id_and_group_id", using: :btree
 
   create_table "profiles", force: :cascade do |t|
     t.string   "user_name",   default: "my username"
