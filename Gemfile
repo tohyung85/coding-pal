@@ -32,6 +32,9 @@ gem 'sass-rails'
 # Simple form
 gem 'simple_form'
 
+# Country select for simple forms
+gem 'country_select'
+
 # Devise gem
 gem 'devise', '>= 3.2.4'
 

@@ -50,7 +50,7 @@
             <% end %>
             <%= link_to group_path(group), class: 'group-box-link' do %>
               <div class='group-prereq'>
-                <p>Country: Singapore</p>
+                <p>Country: <%= group.country_name %></p>
                 <p>Commitment per week: <%= group.commitment_hours%>hrs</p>
                 <p>
                   <% if group.remote == true %>

@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
     @profile = user_of_profile.profile
   end
 
-  def update    
+  def update
     user_of_profile.profile.update_attributes(profile_params)
     redirect_to edit_profile_path
   end
@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
   private
 
   def user_of_profile
-    user ||= User.find(params[:id])    
+    user ||= User.find(params[:id])
   end
 
   def require_authorized_for_action

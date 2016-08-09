@@ -60,6 +60,7 @@ RSpec.describe GroupsController, type: :controller do
             name: 'Test group',
             remote: true,
             course: 'Firehose',
+            country: 'Singapore',
             description: 'this is a test group',
             commitment_hours: 10
           }

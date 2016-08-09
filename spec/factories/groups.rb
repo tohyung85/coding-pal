@@ -5,6 +5,7 @@ FactoryGirl.define do
     end
     remote true
     course 'Firehose Project'
+    country 'Singapore'
     description 'We are an awesome group'
     commitment_hours 20
     association :user
