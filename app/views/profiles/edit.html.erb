@@ -13,6 +13,8 @@
     <br/>
     <%= f.input :country, priority: ['United States', 'Australia', 'Singapore'] %>  
     <br/>
+    <%= f.input :time_zone, priority: /Australia|US|Singapore/ %>
+    <br/>    
     <%= f.input :description%>
     <br/>
     <%= f.input :remote_ok?%>

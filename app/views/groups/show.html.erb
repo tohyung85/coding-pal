@@ -18,6 +18,8 @@
     <div class='individual-group-details'>
       <h3>Group Details</h3>
       <p>Commitment per week: <%= current_group.commitment_hours %> hours</p>
+      <p>Country: <%= current_group.country_name %></p>
+      <p>Time Zone: <%= current_group.time_zone %></p>
       <% if current_group.remote.present? %>
         <p>Remote learners welcome!</p>
       <% else %>
