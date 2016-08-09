@@ -9,16 +9,21 @@ module GroupsHelper
     end
   end
 
-  def render_join_button
+  def render_join_request_button
     if current_user.present? && current_group.members.find_by_id(current_user.id).nil? && current_group.join_requests.find_by('requestor_id = ?', current_user.id ).nil? 
-      return link_to 'Request to Join', group_join_requests_path(current_group), method: :post, class: 'btn btn-success join-button'
+      return content_tag(:button,  'Join Group', class: 'btn btn-success join-button', data: {:toggle => 'modal', :target => '#joinRequestModal'}) 
     end    
+
+    if current_user.present? && current_group.join_requests.find_by('requestor_id = ?', current_user.id ).present?
+      return link_to('Withdraw Join Request', join_request_path(current_group.join_requests.find_by('requestor_id = ?', current_user.id )), method: :delete, class: 'btn btn-danger')
+    end
   end
 
   def render_group_request(request)
     return content_tag :div, class: 'individual-group-request' do
-      concat (content_tag :p, class: 'group-request-details' do
-       link_to(request.requestor.profile.user_name, profile_path(request.requestor), class: 'requestor-profile-link')+ ' ' + 'would like to join the group' + ' '
+      concat (content_tag :div, class: 'group-request-details' do
+       content_tag(:h4, link_to(request.requestor.profile.user_name, profile_path(request.requestor), class: 'requestor-profile-link')+ ' ' + 'would like to join the group') + 
+       content_tag(:p, request.message)
       end)
       if current_group.user == current_user
       concat (content_tag :div, class: 'group-request-buttons' do

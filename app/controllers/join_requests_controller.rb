@@ -5,7 +5,7 @@ class JoinRequestsController < ApplicationController
 
     return render_not_found unless group.present?
 
-    group.join_requests.create(requestor_id: current_user.id)
+    group.join_requests.create(join_request_params.merge(requestor_id: current_user.id))
     redirect_to group_path(group)
   end
 
@@ -26,5 +26,11 @@ class JoinRequestsController < ApplicationController
     request.group.enrollments.create(user_id: request.requestor.id)
     request.destroy
     redirect_to group_path(request.group)
+  end
+
+  private
+
+  def join_request_params
+    params.require(:join_request).permit(:message)
   end
 end
