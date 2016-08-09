@@ -68,7 +68,7 @@ RSpec.describe ProfilesController, type: :controller do
           user_name: 'John Doe'
         }
         user2.profile.reload
-        expect(user2.profile.user_name).to eq 'my username'
+        expect(user2.profile.user_name).to eq user2.email
         expect(response).to have_http_status(:unauthorized)
       end
 
