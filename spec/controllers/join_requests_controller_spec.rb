@@ -15,14 +15,18 @@ RSpec.describe JoinRequestsController, type: :controller do
 
       it 'should allow user to create a request to join group' do
         expect do
-          post :create, group_id: group.id
+          post :create, group_id: group.id, join_request: {
+            message: 'Hello I wanna join'
+          }
         end.to change { JoinRequest.count }.by 1
 
         expect(response).to redirect_to group_path(group)
       end
       it 'should return 404 error if group not found' do
         expect do
-          post :create, group_id: 'YOLOgroup'
+          post :create, group_id: 'YOLOgroup', join_request: {
+            message: 'Hello I wanna join'
+          }
         end.to_not change { JoinRequest.count }
 
         expect(response).to have_http_status(:not_found)
@@ -32,7 +36,9 @@ RSpec.describe JoinRequestsController, type: :controller do
     context 'user not signed in' do
       it 'should not allow user to create request and redirect to sign in page' do
         expect do
-          post :create, group_id: group.id
+          post :create, group_id: group.id, join_request: {
+            message: 'Hello I wanna join'
+          }
         end.to_not change { JoinRequest.count }
 
         expect(response).to redirect_to new_user_session_path
