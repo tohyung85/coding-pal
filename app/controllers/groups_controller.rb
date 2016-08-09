@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @priority_timezones = ActiveSupport::TimeZone['Singapore']
   end
 
   def update
@@ -50,6 +51,6 @@ class GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:name, :course, :remote, :commitment_hours, :image, :description)
+    params.require(:group).permit(:name, :course, :country, :time_zone, :remote, :commitment_hours, :image, :description)
   end
 end

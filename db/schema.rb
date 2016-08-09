@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809022405) do
+ActiveRecord::Schema.define(version: 20160809053947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,12 @@ ActiveRecord::Schema.define(version: 20160809022405) do
     t.integer  "user_id"
     t.string   "image"
     t.text     "description"
+    t.string   "country"
+    t.string   "time_zone"
   end
 
+  add_index "groups", ["country"], name: "index_groups_on_country", using: :btree
+  add_index "groups", ["time_zone"], name: "index_groups_on_time_zone", using: :btree
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 
   create_table "join_requests", force: :cascade do |t|
@@ -59,7 +63,12 @@ ActiveRecord::Schema.define(version: 20160809022405) do
     t.integer  "user_id"
     t.string   "avatar"
     t.text     "description"
+    t.string   "country"
+    t.string   "time_zone"
   end
+
+  add_index "profiles", ["country"], name: "index_profiles_on_country", using: :btree
+  add_index "profiles", ["time_zone"], name: "index_profiles_on_time_zone", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
