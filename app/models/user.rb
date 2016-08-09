@@ -15,6 +15,6 @@ class User < ActiveRecord::Base
   private
 
   def profile_creation
-    create_profile
+    create_profile(user_name: email)
   end
 end
