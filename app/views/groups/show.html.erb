@@ -1,7 +1,8 @@
 <div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12'>
   <div class='current-group-contents'>
+
     <div class='individual-group-heading'>
-    <br/>
+      <br/>
       <% if current_group.image.present? %>
         <%= image_tag current_group.image, class: 'group-display-image' %>
       <% else %>
@@ -13,6 +14,7 @@
       <p>is working on...</p>
       <h2><%= current_group.course %></h2>
     </div>
+
     <div class='individual-group-details'>
       <h3>Group Details</h3>
       <p>Commitment per week: <%= current_group.commitment_hours %> hours</p>
@@ -21,19 +23,15 @@
       <% else %>
         <p>Local learners please</p>
       <% end %>
+
       <div class='group-members'>
         Members: 
         <% current_group.members.each do |member| %>
-          <%= link_to profile_path(member.profile), class: 'group-members-profile-link' do %>
-            <% if member.profile.avatar.present? %>
-              <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
-            <% else %>
-              <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
-            <% end %>      
-          <% end %>
+          <%= render_member(member) %>
         <% end %>
       </div>
     </div>
+
     <div class='individual-group-owner'>
       <%= image_tag current_group.user.profile.avatar, class: 'group-owner-avatar' %>
       <div class='group-owner-details'>
@@ -41,21 +39,27 @@
         <p><%= current_group.user.profile.description %></p>
       </div>
     </div>
+
     <div class='individual-group-description'>
       <h3>Group Description</h3>
       <p><%= current_group.description%></p>
     </div>
-    <% if current_user.present? && current_group.members.find_by_id(current_user.id).nil? %>
-      <%= link_to 'Request to Join', group_enrollments_path(current_group), method: :post, class: 'btn btn-success join-button' %>
-    <% end %>
+
+    <%= render_join_button %>
 
     <% if current_group.user == current_user %>
       <div class='group-requests'>
         <h3>Group Requests</h3>
+        <% current_group.join_requests.each do |request| %>
+        <br class='clear'/>
+          <%= render_group_request(request) %>
+        <% end %>
       </div>
 
+      <br/>
       <%= link_to 'Edit Group Details',edit_group_path(current_group), class: 'btn btn-primary' %>
-    <% end %>
+      <% end %>        
+      
       
   </div>
 </div>
