@@ -2,8 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   root 'static_pages#landing_page'
   resources :profiles, only: [:edit, :show, :update]
+  resources :join_requests, only: [:destroy] do
+    delete '/enroll', to: 'join_requests#enroll'
+  end
   resources :groups do
     resources :enrollments, only: [:create]
+    resources :join_requests, only: [:create]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe EnrollmentsController, type: :controller do
   let(:group) { FactoryGirl.create(:group) }
   let(:user) { FactoryGirl.create(:user) }
+  let(:request) { FactoryGirl.create(:join_request) }
   describe '#create' do
     context 'user signed in' do
       before do

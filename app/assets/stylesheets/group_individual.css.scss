@@ -23,7 +23,7 @@ $grey : #7E7F81;
   margin-left: 30px;
 }
 
-.individual-group-heading, .individual-group-details, .individual-group-owner {
+.individual-group-heading, .individual-group-details, .individual-group-owner, .individual-group-requests {
   border-bottom: 1px solid #cccccc;
   padding: 20px;
 }
@@ -46,4 +46,25 @@ $grey : #7E7F81;
 
 .current-group-contents h2 {
   color: $green;
+}
+
+.individual-group-request {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #cccccc;  
+}
+
+.group-request-buttons a {
+  margin: 10px;
+  margin-left: 0px;
+}
+
+.requestor-profile-link {
+  color: $blue;  
+}
+
+.requestor-profile-link:hover {
+  color: $light-blue;  
+  text-decoration: none;
 }
