@@ -1,1 +1,51 @@
-<h1>Profile</h1>
+<div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12'>
+  <div class='current-profile-contents'>
+    <% if @profile.avatar.present? %>
+      <%= image_tag @profile.avatar, class: 'profile-image' %>
+    <% else %>
+      <%= image_tag 'profile_image_placeholder.png', class: 'profile-image' %>
+    <% end %>
+    <br/>
+    <div class='user-profile'>
+      <h3>Hi, I am <span class='user-detail'><%= @profile.user_name %></span>, I live in <span class='user-detail'><%= @profile.country_name %></span>. My time zone is currently <span class='user-detail'><%= @profile.time_zone %></span></h3>
+      <% if @profile.remote_ok? %>
+        <p>I am happy learn remotely!</p>
+      <% else %>
+        <p>I am looking to join local groups!</p>
+      <% end %>
+      <p><%= @profile.description %></p>
+    </div>
+    <div class='user-groups'>
+      <% if @profile.user.groups.present? %>
+        <h3><span class='user-detail'><%= @profile.user_name %></span> is currently a member of these groups:</h3>
+        <% @profile.user.enrollments.each do |enrollment|%>
+          
+            <%= link_to group_path(enrollment.group) do %>
+            <div class='user-group-div'>
+              <% if enrollment.group.image.present? %>
+                <%= image_tag enrollment.group.image, class: 'profile-group-image' %>
+              <% else %>
+                <%= image_tag 'profile_image_placeholder.png', class: 'profile-group-image' %>
+              <% end %>
+              <div class= 'profile-group-details col-xs-9'>
+                <h3 class='profile-group-name'><%= enrollment.group.name %></h3>
+                <p>is working on...</p>
+                <h3 class='profile-group-course'><%= enrollment.group.course %></h3>
+                <p><%= enrollment.group.description %></p>
+              </div>
+            </div>              
+            <% end %>
+
+        <% end %>
+      <% else %>
+        <h3><span class='user-detail'><%= @profile.user_name %></span> is currently not a member of any groups</h3>
+
+      <% end %>
+
+    </div>
+    <br/>
+    <% if current_user == @profile.user %>
+      <%= link_to 'Edit Profile', edit_profile_path(current_user), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

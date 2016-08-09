@@ -1,4 +1,77 @@
+$blue : #00AEDB;
+$green : #8DC53E;
+$light-blue : #60C9E7;
+$dark-brown : #605C50;
+$grey : #7E7F81;
+
+.current-profile-contents{
+  padding-top: 30px;
+}
+
+.user-profile {
+  border-bottom: 1px solid #cccccc;
+  padding: 20px;
+}
+
+.profile-groups {
+
+}
+
+.user-groups a {
+  text-decoration: none;
+  color: black;
+}
+
+.user-groups a:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.user-groups > h3 {
+  padding: 20px;
+}
+
+.profile-groups h3, .profile-groups h4, .profile-groups p{
+  margin: 0px;
+}
+
+.profile-groups p{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.profile-group-name {
+  color: $blue;
+}
+
+.profile-group-course {
+  color: $green;
+}
+
 .profile-image {
   height: 200px;
   width: auto;
+  border-radius: 100%;
+}
+
+.user-detail {
+  color: $light-blue;
+}
+
+.profile-group-image {
+  margin-top: 30px;
+  height: 140px;
+  width: 140px;
+  border-radius: 100%;
+}
+
+.user-group-div {
+  display: flex;
+  border-bottom: 1px solid #cccccc;
+  overflow: hidden;
+}
+
+.profile-group-details {
+  margin-left: 30px;
+  height: 200px;
 }

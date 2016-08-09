@@ -1,7 +1,8 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   before_action :require_authorized_for_action, only: [:edit, :update]
   def show
+    @profile = user_of_profile.profile
   end
 
   def edit
@@ -10,13 +11,13 @@ class ProfilesController < ApplicationController
 
   def update
     user_of_profile.profile.update_attributes(profile_params)
-    redirect_to edit_profile_path
+    redirect_to profile_path(user_of_profile)
   end
 
   private
 
   def user_of_profile
-    user ||= User.find(params[:id])
+    @user ||= User.find(params[:id])
   end
 
   def require_authorized_for_action
@@ -24,6 +25,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:user_name, :remote_ok?, :avatar, :description)
+    params.require(:profile).permit(:user_name, :remote_ok?, :avatar, :description, :country, :time_zone)
   end
 end

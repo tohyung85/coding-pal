@@ -1,6 +1,6 @@
 module GroupsHelper
   def render_member(member)
-    link_to profile_path(member.profile), class: 'group-members-profile-link' do
+    link_to profile_path(member), class: 'group-members-profile-link' do
       if member.profile.avatar.present?
         image_tag(member.profile.avatar, class: 'group-members-image')
       else

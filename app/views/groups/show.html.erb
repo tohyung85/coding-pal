@@ -34,6 +34,7 @@
       </div>
     </div>
 
+    <%= link_to profile_path(current_group.user), class: 'group-user-profile-link' do %>
     <div class='individual-group-owner'>
       <%= image_tag current_group.user.profile.avatar, class: 'group-owner-avatar' %>
       <div class='group-owner-details'>
@@ -41,6 +42,7 @@
         <p><%= current_group.user.profile.description %></p>
       </div>
     </div>
+    <% end %>
 
     <div class='individual-group-description'>
       <h3>Group Description</h3>
