@@ -48,6 +48,9 @@ gem 'mini_magick', '~> 4.3.1'
 # Figaro gem
 gem 'figaro'
 
+# Pagination Gem
+gem 'will_paginate', '~> 3.1.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
