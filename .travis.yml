@@ -19,7 +19,7 @@ deploy:
   api_key:
     secure: 7679a131-2524-4ea5-ae9d-9b67d9f45b68
   app:
-    production: coding-pal
-    master: coding-pal-staging
+    production: coding-pals
+    master: coding-pals-staging
   on:
     repo: tohyung85/coding-pal
