@@ -1,4 +1,4 @@
-<div class='col-xs-10 col-xs-offset-1'>
+<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
   <div class='groups-index-contents-inner'>
     <% @groups.each do |group| %>
       <div class='group-box'>
@@ -86,4 +86,7 @@
       </div>
     <% end %>
   </div>
+  <div class='pagination-div'>
+    <%= will_paginate @groups %>
+  </div>      
 </div>
