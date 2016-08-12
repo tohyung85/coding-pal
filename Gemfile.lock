@@ -166,6 +166,8 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.1.0)
     rake (11.2.2)
+    ranked-model (0.4.0)
+      activerecord (>= 3.1.12)
     rdoc (4.2.2)
       json (~> 1.4)
     responders (2.2.0)
@@ -256,6 +258,7 @@ DEPENDENCIES
   pg (~> 0.15)
   rails (= 4.2.6)
   rails_12factor
+  ranked-model
   rspec-rails (~> 3.5)
   rubocop (~> 0.42.0)
   sass-rails

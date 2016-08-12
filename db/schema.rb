@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809053947) do
+ActiveRecord::Schema.define(version: 20160811130711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,9 +38,11 @@ ActiveRecord::Schema.define(version: 20160809053947) do
     t.text     "description"
     t.string   "country"
     t.string   "time_zone"
+    t.integer  "row_order"
   end
 
   add_index "groups", ["country"], name: "index_groups_on_country", using: :btree
+  add_index "groups", ["row_order"], name: "index_groups_on_row_order", using: :btree
   add_index "groups", ["time_zone"], name: "index_groups_on_time_zone", using: :btree
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 

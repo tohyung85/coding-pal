@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :require_authorized_for_action, only: [:edit, :update, :destroy]
   def index
-    @groups = Group.paginate(page: params[:page], per_page: 6)
+    @groups = Group.paginate(page: params[:page], per_page: 6).order('row_order DESC')
   end
 
   def show
@@ -22,7 +22,6 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @priority_timezones = ActiveSupport::TimeZone['Singapore']
   end
 
   def update

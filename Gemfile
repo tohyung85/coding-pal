@@ -48,6 +48,9 @@ gem 'mini_magick', '~> 4.3.1'
 # Figaro gem
 gem 'figaro'
 
+# Ranked Model Gem
+gem 'ranked-model'
+
 # Pagination Gem
 gem 'will_paginate', '~> 3.1.0'
 

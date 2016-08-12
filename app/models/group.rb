@@ -1,4 +1,7 @@
 class Group < ActiveRecord::Base
+  include RankedModel
+  ranks :row_order
+
   mount_uploader :image, ImageUploader
 
   belongs_to :user
