@@ -20,7 +20,7 @@ class Group < ActiveRecord::Base
     country_fullname = ISO3166::Country[country]
 
     return '' unless country_fullname.present?
-    
+
     country_fullname.translations[I18n.locale.to_s] || country_fullname.name
   end
 end
