@@ -8,16 +8,16 @@ RSpec.describe Member::MessagesController, type: :controller do
     context 'user signed in' do
       render_views
       before do
-       # sign_in enrollment.user
+        # sign_in enrollment.user
       end
       it 'should allow member to view create message page' do
-       # get :new, group_id: enrollment.group.id
-       # puts enrollment.inspect
-       # expect(response).to have_http_status(:success)
+        # get :new, group_id: enrollment.group.id
+        # puts enrollment.inspect
+        # expect(response).to have_http_status(:success)
       end
       it 'should not allow non-members to view create message page' do
-       # get :new, group_id: enrollment.group.id
-       # expect(response).to have_http_status(:unauthorized)
+        # get :new, group_id: enrollment.group.id
+        # expect(response).to have_http_status(:unauthorized)
       end
     end
   end
