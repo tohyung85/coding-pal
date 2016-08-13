@@ -21,16 +21,26 @@ module GroupsHelper
 
   def render_group_request(request)
     content_tag :div, class: 'individual-group-request' do
-      concat (content_tag :div, class: 'group-request-details' do
-                content_tag(:h4, link_to(request.requestor.profile.user_name, profile_path(request.requestor), class: 'requestor-profile-link') + ' ' + 'would like to join the group') +
-                content_tag(:p, request.message)
-              end)
+      concat(render_group_request_details(request))
       if current_group.user == current_user
-        concat (content_tag :div, class: 'group-request-buttons' do
-                  link_to('Enroll User', join_request_enroll_path(request), method: :delete, class: 'btn btn-success') +
-                  link_to('Reject Request', join_request_path(request), method: :delete, class: 'btn btn-danger')
-                end)
+        concat(render_group_request_buttons(request))
       end
+    end
+  end
+
+  private
+
+  def render_group_request_details(request)
+    content_tag :div, class: 'group-request-details' do
+      content_tag(:h4, link_to(request.requestor.profile.user_name, profile_path(request.requestor), class: 'requestor-profile-link') + ' ' + 'would like to join the group') +
+        content_tag(:p, request.message)
+    end
+  end
+
+  def render_group_request_buttons(request)
+    content_tag :div, class: 'group-request-buttons' do
+      link_to('Enroll User', join_request_enroll_path(request), method: :delete, class: 'btn btn-success') +
+        link_to('Reject Request', join_request_path(request), method: :delete, class: 'btn btn-danger')
     end
   end
 end

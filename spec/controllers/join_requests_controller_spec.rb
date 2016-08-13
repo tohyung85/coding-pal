@@ -57,7 +57,7 @@ RSpec.describe JoinRequestsController, type: :controller do
       it 'should allow requestor to destroy or cancel join request' do
         expect do
           delete :destroy, id: request.id
-        end.to change { JoinRequest.count }.by -1
+        end.to change { JoinRequest.count }.by(-1)
 
         expect(response).to redirect_to group_path(request.group)
       end
@@ -89,7 +89,7 @@ RSpec.describe JoinRequestsController, type: :controller do
       it 'should allow group owner to destroy or reject join request' do
         expect do
           delete :destroy, id: request.id
-        end.to change { JoinRequest.count }.by -1
+        end.to change { JoinRequest.count }.by(-1)
 
         expect(response).to redirect_to group_path(request.group)
       end
@@ -117,7 +117,7 @@ RSpec.describe JoinRequestsController, type: :controller do
       it 'should allow owner to enroll requestor' do
         expect do
           delete :enroll, join_request_id: request.id
-        end.to change { JoinRequest.count }.by -1
+        end.to change { JoinRequest.count }.by(-1)
 
         expect(request.group.members.find_by_id(request.requestor.id)).to_not eq nil
         expect(response).to redirect_to group_path(request.group)
