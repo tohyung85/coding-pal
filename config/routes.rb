@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :join_requests, only: [:destroy] do
     delete '/enroll', to: 'join_requests#enroll'
   end
+  namespace :member do
+    resources :messages, only: [:new, :create, :edit, :update, :destroy]
+  end
   resources :groups do
     resources :enrollments, only: [:create]
     resources :join_requests, only: [:create]

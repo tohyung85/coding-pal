@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :enrollments
   has_many :enrolled_groups, through: :enrollments, source: :group
   has_many :join_requests, foreign_key: 'requestor_id'
+  has_many :messages
 
   after_create :profile_creation
 
