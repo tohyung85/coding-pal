@@ -1,6 +1,7 @@
 module Member
   class GroupsController < ApplicationController
     def show
+      @message = Message.new
     end
 
     private

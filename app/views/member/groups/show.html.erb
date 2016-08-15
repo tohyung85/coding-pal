@@ -43,6 +43,12 @@
       </div>
     </div>
 
+    <%= simple_form_for @message, url: '#', method: :post do |f| %>
+      <%= f.input :message_title %>
+      <%= f.input :message_description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'projects'}} %>
+      <%= f.submit 'Post', class: 'btn btn-primary' %>
+    <% end %>
+
     <div class='member-options'>
       <%= link_to 'Leave Group', '#', class: 'btn btn-danger' %>
     </div>
