@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   namespace :member do
     resources :messages, only: [:new, :create, :edit, :update, :destroy]
+    resources :groups, only: [:show]
   end
   resources :groups do
     resources :enrollments, only: [:create]

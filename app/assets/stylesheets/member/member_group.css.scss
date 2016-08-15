@@ -1,0 +1,49 @@
+$blue : #00AEDB;
+$green : #8DC53E;
+$light-blue : #60C9E7;
+$dark-brown : #605C50;
+$grey : #7E7F81;
+
+.member-group-details {
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.member-group-name {
+  color: $blue;
+}
+
+.member-group-course {
+  
+}
+
+.member-group-coursename {
+  color: $green;
+  font-size: 16px;
+}
+
+.member-message {
+  margin-bottom: 20px;  
+  box-shadow: 0px 0px 10px $grey;
+  padding: 10px;  
+}
+
+.member-message_title {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.member-message_content {
+  height: 100px;
+  overflow: hidden;
+}
+
+.member-message_poster {
+  float: right;
+  font-style: italic;
+  font-size: 16px;
+  color: $dark-brown;
+}
