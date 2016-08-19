@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(ckeditor/*)
 Rails.application.config.assets.precompile += %w(groups_index.js)
 Rails.application.config.assets.precompile += %w(highlight.pack.js)
+Rails.application.config.assets.precompile += %w(truncate_message.js)
