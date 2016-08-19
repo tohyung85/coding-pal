@@ -42,14 +42,34 @@
       <%= will_paginate @messages %>
     </div>      
 
-    <%= simple_form_for @message, url: member_group_messages_path(current_group), method: :post do |f| %>
-      <%= f.input :message_title %>
-      <%= f.input :message_description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'projects'}} %>  
-      <%= f.submit 'Post', class: 'btn btn-primary' %>
-    <% end %>
+    <div class='member-options'>      
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMessageModal">
+        Post Message to Group
+      </button>
+      <%= link_to 'Leave Group', '#', data: {confirm: 'Are you sure you want to leave the group?'} ,class: 'btn btn-danger' %>
+    </div>
 
-    <div class='member-options'>
-      <%= link_to 'Leave Group', '#', class: 'btn btn-danger' %>
+    <!-- Modal -->
+    <div class="modal fade" id="createMessageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">New Message</h4>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for @message, url: member_group_messages_path(current_group), method: :post do |f| %>
+              <%= f.input :message_title %>
+              <%= f.input :message_description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'projects'}} %>  
+          </div>
+          <div class="modal-footer">            
+              <%= f.submit 'Post', class: 'btn btn-primary' %>
+            <% end %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

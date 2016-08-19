@@ -2,7 +2,7 @@ module Member
   class GroupsController < ApplicationController
     def show
       @message = Message.new
-      @messages = current_group.messages.paginate(page: params[:page], per_page: 2).order('created_at DESC')
+      @messages = current_group.messages.paginate(page: params[:page], per_page: 4).order('created_at DESC')
     end
 
     private
