@@ -2,6 +2,8 @@ module Member
   class GroupsController < ApplicationController
     def show
       @message = Message.new
+      @messages = current_group.messages
+      puts @messages      
     end
 
     private

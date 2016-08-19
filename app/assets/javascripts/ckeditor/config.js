@@ -36,7 +36,7 @@ CKEDITOR.editorConfig = function( config )
   config.extraPlugins = 'codesnippet';
 
   // Toolbar groups configuration.
-  
+  /*
   config.toolbar = [
     { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
     { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
@@ -50,7 +50,7 @@ CKEDITOR.editorConfig = function( config )
     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
   ];
-
+*/
 
   config.toolbar_mini = [
     { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
@@ -64,10 +64,9 @@ CKEDITOR.editorConfig = function( config )
   config.toolbar_projects = [
     { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
     { name: 'styles', items: [ 'Font', 'FontSize' ] },
-    { name: 'colors', items: [ 'TextColor', 'BGColor', 'CodeSnippet'] },
+    { name: 'colors', items: [ 'TextColor', 'BGColor'] },
     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] },
     { name: 'code', items: [ 'CodeSnippet' ] },
   ];
   config.toolbar = "projects"
 };
-//alert(CKEDITOR.version);

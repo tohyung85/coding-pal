@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'static_pages#landing_page'
   resources :profiles, only: [:edit, :show, :update]
   resources :join_requests, only: [:destroy] do
     delete '/enroll', to: 'join_requests#enroll'
   end
-  namespace :member do
-    resources :messages, only: [:new, :create, :edit, :update, :destroy]
-    resources :groups, only: [:show]
+  namespace :member do    
+    resources :groups, only: [:show] do
+      resources :messages, only: [:new, :create, :edit, :update, :destroy]
+    end
   end
   resources :groups do
     resources :enrollments, only: [:create]

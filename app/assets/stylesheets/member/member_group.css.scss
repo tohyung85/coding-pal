@@ -36,6 +36,11 @@ $grey : #7E7F81;
   margin-bottom: 20px;
 }
 
+.member-message_time {
+  font-size: 14px;
+  color: $grey;
+}
+
 .member-message_content {
   height: 100px;
   overflow: hidden;
