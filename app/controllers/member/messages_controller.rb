@@ -16,7 +16,7 @@ module Member
     def create
       group = Group.find(params[:group_id])
       return render_not_found(:unauthorized) unless group.members.find_by_id(current_user.id).present?
-      group.messages.create(message_params.merge({ user_id: current_user.id}))
+      group.messages.create(message_params.merge(user_id: current_user.id))
       redirect_to member_group_path(group)
     end
 

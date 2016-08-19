@@ -73,7 +73,7 @@ RSpec.describe Member::MessagesController, type: :controller do
             message_description: 'Yes right now!'
           }
         end.to change { Message.count }.by 1
-        expect(response).to redirect_to group_path(enrollment.group)
+        expect(response).to redirect_to member_group_path(enrollment.group)
       end
 
       it 'should not allow non members to create message' do
