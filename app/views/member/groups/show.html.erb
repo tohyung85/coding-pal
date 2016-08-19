@@ -1,0 +1,102 @@
+<%= javascript_include_tag 'truncate_message' %>
+
+<div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12'>
+  <div class='member-group-contents'>
+    <div class='member-group-details'>
+      <div class='member-group-details-and-members'>
+        <h1 class='member-group-name'><%= current_group.name %></h1>
+        <h3>Group Details</h3>
+        <br/>
+        <p class='member-group-course'>Course: <span class='member-group-coursename'><%= current_group.course %></span></p>
+        <p>Commitment per week: <%= current_group.commitment_hours %> hours</p>
+        <p>Country: <%= current_group.country_name %></p>
+        <p>Time Zone: <%= current_group.time_zone %></p>
+        <% if current_group.remote.present? %>
+          <p>We work remotely!</p>
+        <% else %>
+          <p>We meet up!</p>
+        <% end %>
+
+        <div class='group-members'>
+          Members: 
+          <% current_group.members.each do |member| %>
+            <%= render_member(member) %>
+          <% end %>
+        </div>
+      </div>
+        <%= link_to 'Public Group Page', group_path(current_group) , class: 'btn btn-primary' %>
+    </div>    
+
+    </br class='clear'>
+    <h2>Messages</h2>
+    </br>
+    <div class='member-group-messages'>      
+      <% @messages.each do |message| %>
+        <div class='member-message'>
+          <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
+          <div class='member-message_content' data-id=<%= message.id %>>
+            <%= message.message_description.html_safe %>
+            <div class='member-message_content-inner'></div>
+          </div>
+          <p class='member-message_poster'>-<%= message.user.profile.user_name %></p>
+          </br class='clear'>
+        </div>
+      <% end %>
+    </div>
+    <div class='pagination-div'>
+      <%= will_paginate @messages %>
+    </div>      
+
+    <div class='member-options'>      
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMessageModal">
+        Post Message to Group
+      </button>
+      <% enrollment = Enrollment.where(user_id: current_user.id, group_id: current_group.id).first %>
+      <%= link_to 'Leave Group', enrollment_path(enrollment), method: :delete, data: {confirm: 'Are you sure you want to leave the group?'} ,class: 'btn btn-danger' %>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createMessageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">New Message</h4>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for @message, url: member_group_messages_path(current_group), method: :post do |f| %>
+              <%= f.input :message_title %>
+              <%= f.input :message_description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'projects'}} %>  
+          </div>
+          <div class="modal-footer">            
+              <%= f.submit 'Post', class: 'btn btn-primary' %>
+            <% end %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% @messages.each do |message| %>
+      <!-- Modal -->
+      <div class="modal fade" id="messageModal-<%= message.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><%= message.message_title %></h4>
+            </div>
+            <div class="modal-body">
+              <%= message.message_description.html_safe %>  
+            </div>
+            <div class="modal-footer">            
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

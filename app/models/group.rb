@@ -8,6 +8,7 @@ class Group < ActiveRecord::Base
   has_many :enrollments
   has_many :members, through: :enrollments, source: :user
   has_many :join_requests, foreign_key: 'group_id'
+  has_many :messages
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :commitment_hours, presence: true, numericality: { greater_than_or_equal_to: 0 }

@@ -5,4 +5,10 @@ class EnrollmentsController < ApplicationController
     group.enrollments.create(user_id: current_user.id)
     redirect_to group_path(group)
   end
+
+  def destroy
+    enrollment = Enrollment.find(params[:id])
+    enrollment.destroy
+    redirect_to groups_path
+  end
 end

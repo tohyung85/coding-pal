@@ -4,6 +4,7 @@ RSpec.describe EnrollmentsController, type: :controller do
   let(:group) { FactoryGirl.create(:group) }
   let(:user) { FactoryGirl.create(:user) }
   let(:request) { FactoryGirl.create(:join_request) }
+  let(:enrollment) { FactoryGirl.create(:enrollment) }
   describe '#create' do
     context 'user signed in' do
       before do
@@ -31,6 +32,20 @@ RSpec.describe EnrollmentsController, type: :controller do
       it 'should not allow user to create an enrollment' do
         expect { post :create, group_id: group.id }.to_not change { Enrollment.count }
         expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe '#destroy' do
+    context 'user signed in' do
+      before do
+        sign_in enrollment.user
+      end
+      it 'should allow user to destroy enrollment if he is a member' do
+        expect do
+          delete :destroy, id: enrollment.id
+        end.to change { Enrollment.count }.by(-1)
+        expect(response).to redirect_to groups_path
       end
     end
   end

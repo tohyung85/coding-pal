@@ -5,6 +5,8 @@
   <meta name="viewport" content="initial-scale=1">  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'groups_index' %>
+  <%= javascript_include_tag 'highlight.pack' %>
   <%= csrf_meta_tags %>
   <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,300' rel='stylesheet' type='text/css'>
@@ -72,6 +74,6 @@
   </div>
 </footer>
 
-
+<script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

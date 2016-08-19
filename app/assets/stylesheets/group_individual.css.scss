@@ -28,6 +28,12 @@ $grey : #7E7F81;
   padding: 20px;
 }
 
+.individual-group-heading-details-and-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .individual-group-description {
   padding: 20px;  
 }
