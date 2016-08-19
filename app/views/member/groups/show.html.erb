@@ -38,6 +38,9 @@
         </div>
       <% end %>
     </div>
+    <div class='pagination-div'>
+      <%= will_paginate @messages %>
+    </div>      
 
     <%= simple_form_for @message, url: member_group_messages_path(current_group), method: :post do |f| %>
       <%= f.input :message_title %>
