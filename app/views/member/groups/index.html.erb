@@ -1,0 +1,92 @@
+<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
+  <div class='groups-index-contents-inner'>
+    <% @groups.each do |group| %>
+      <div class='group-box'>
+        <div class='group-front'>
+          <%= link_to member_group_path(group), class: 'group-box-link' do %>
+            <% if group.image.present? %>
+              <%= image_tag(group.image, class: 'group-image')%>
+            <% else %>
+              <%= image_tag('coverimage.jpg', class: 'group-image') %>
+            <% end %>
+          <% end %>
+        <div class='group-contents'>
+          <%= link_to member_group_path(group), class: 'group-box-link' do %>  
+            <div class='group-heading'>
+              <h1><%= group.name %></h1>
+              <p>is working on..</p>
+              <h3><%= group.course %></h3>
+            </div>
+          <% end %>
+        <div class='group-details'>
+          <div class='group-members'>
+            Members: 
+            <% group.members.each do |member| %>
+              <%= link_to profile_path(member), class: 'group-members-profile-link' do %>
+                <% if member.profile.avatar.present? %>
+                  <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+                <% else %>
+                  <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+                <% end %>      
+              <% end %>
+            <% end %>
+          </div>
+          <br/>
+          <%= link_to member_group_path(group), class: 'group-box-link' do %>
+            <p class='group-description'><%= group.description%></p>
+          <% end %>
+        </div>            
+      </div>
+    </div>
+
+        <div class='group-back hidden'>
+          <div class='group-contents'>
+            <%= link_to member_group_path(group), class: 'group-box-link' do %>
+              <div class='group-heading'>
+                <h1><%= group.name %></h1>
+                <p>is working on..</p>
+                <h3><%= group.course %></h3>
+              </div>
+            <% end %>
+            <%= link_to member_group_path(group), class: 'group-box-link' do %>
+              <div class='group-prereq'>
+                <p>Country: <%= group.country_name %></p>
+                <p>Time Zone: <%= group.time_zone %></p>
+                <p>Commitment per week: <%= group.commitment_hours%>hrs</p>
+                <p>
+                  <% if group.remote == true %>
+                    Remote members welcome
+                  <% else %>
+                    Local members only
+                  <% end %>
+                </p>
+              </div>                        
+            <% end %>
+            <div class='group-details'>
+              <br/>
+              <div class='group-members'>
+                Members: 
+                <% group.members.each do |member| %>
+                  <%= link_to profile_path(member), class: 'group-members-profile-link' do %>
+                    <% if member.profile.avatar.present? %>
+                      <%= image_tag(member.profile.avatar, class: 'group-members-image') %>
+                    <% else %>
+                      <%= image_tag('http://placehold.it/30x30', class: 'group-members-image')%>
+                    <% end %>      
+                  <% end %>
+                <% end %>
+              </div>
+              <br/>
+              <%= link_to member_group_path(group), class: 'group-box-link' do %>
+                <p class='group-description'><%= group.description%></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class='pagination-div'>
+    <%= will_paginate @groups %>
+  </div>      
+</div>
