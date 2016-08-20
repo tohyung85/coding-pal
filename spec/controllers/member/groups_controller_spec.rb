@@ -4,6 +4,24 @@ RSpec.describe Member::GroupsController, type: :controller do
   let(:group) { FactoryGirl.create(:group) }
   let(:user) { FactoryGirl.create(:user) }
   let(:enrollment) { FactoryGirl.create(:enrollment) }
+
+  describe '#index' do
+    context 'user signed in' do
+      before do
+        sign_in enrollment.user
+      end
+      it 'should show index page if user is signed in' do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+    end
+    context 'user not signed in' do
+      it 'should not show index page if user is not signed in' do
+        get :index
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
   describe '#show' do
     context 'user signed in' do
       before do
