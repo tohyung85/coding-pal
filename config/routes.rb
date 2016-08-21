@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     resources :enrollments, only: [:create]
     resources :join_requests, only: [:create]
   end
+  resources :users do
+    resources :user_messages, only: [:new, :create, :destroy]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

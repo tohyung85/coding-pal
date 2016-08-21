@@ -11,5 +11,4 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe UserMessagesHelper, type: :helper do
-  
 end
