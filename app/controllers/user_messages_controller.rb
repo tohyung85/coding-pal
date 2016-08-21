@@ -1,8 +1,8 @@
 class UserMessagesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @received_messages = current_user.received_messages.paginate(page: params[:received_page], per_page: 4).order('created_at DESC')
-    @sent_messages = current_user.received_messages.paginate(page: params[:sent_page], per_page: 4).order('created_at DESC')
+    @received_messages = current_user.received_messages.paginate(page: params[:received_page], per_page: 3).order('created_at DESC')
+    @sent_messages = current_user.received_messages.paginate(page: params[:sent_page], per_page: 3).order('created_at DESC')
   end
 
   def new
