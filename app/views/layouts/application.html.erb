@@ -38,7 +38,7 @@
           <li><%= link_to 'My Groups', member_groups_path %></li>
           <li><%= link_to 'My Messages', user_messages_path %></li>
           <li><%= link_to 'Add Group', new_group_path %></li>
-          <li><%= link_to 'Profile', edit_profile_path(current_user) %></li>
+          <li><%= link_to 'Profile', profile_path(current_user) %></li>
         <% end %>          
         <% if current_user.present? %>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
