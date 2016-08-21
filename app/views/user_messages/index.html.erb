@@ -1,0 +1,87 @@
+<%= javascript_include_tag 'truncate_message' %>
+
+<div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12'>
+  <div class='user-messages-inner'>
+    <div class='received-messages'>
+      <h2>Received Messages</h2>
+      </br>
+      <div class='member-group-messages'>
+        <% @received_messages.each do |message| %>
+          <div class='member-message'>
+            <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
+            <div class='member-message_content' data-id=<%= message.id %>>
+              <%= message.message_description.html_safe %>
+              <div class='member-message_content-inner'></div>
+            </div>
+            <p class='member-message_poster'>-<%=link_to message.sender.profile.user_name, profile_path(message.sender) %></p>
+            </br class='clear'>
+          </div>
+        <% end %>
+      </div>
+      <div class='pagination-div'>
+        <%= will_paginate @received_messages, param_name: 'received_page' %>
+      </div>
+    </div>
+
+    <div class='sent-messages'>
+      <h2>Sent Messages</h2>
+      </br>
+      <div class='member-group-messages'>
+        <% @sent_messages.each do |message| %>
+          <div class='member-message'>
+            <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
+            <div class='member-message_content' data-id=<%= message.id %>>
+              <%= message.message_description.html_safe %>
+              <div class='member-message_content-inner'></div>
+            </div>
+            <p class='member-message_poster'>Sent to-<%= link_to message.receipient.profile.user_name, profile_path(message.receipient) %></p>
+            </br class='clear'>
+          </div>
+        <% end %>
+      </div>
+      <div class='pagination-div'>
+        <%= will_paginate @sent_messages, param_name: 'sent_page' %>
+      </div>
+    </div>
+
+    <% @received_messages.each do |message| %>
+      <!-- Modal -->
+      <div class="modal fade" id="messageModal-<%= message.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><%= message.message_title %></h4>
+            </div>
+            <div class="modal-body">
+              <%= message.message_description.html_safe %>  
+            </div>
+            <div class="modal-footer">            
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% @sent_messages.each do |message| %>
+      <!-- Modal -->
+      <div class="modal fade" id="messageModal-<%= message.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><%= message.message_title %></h4>
+            </div>
+            <div class="modal-body">
+              <%= message.message_description.html_safe %>  
+            </div>
+            <div class="modal-footer">            
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>    
+  </div>
+</div>

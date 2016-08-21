@@ -4,6 +4,24 @@ RSpec.describe UserMessagesController, type: :controller do
   let(:receiving_user) { FactoryGirl.create(:user) }
   let(:sending_user) { FactoryGirl.create(:user) }
   let(:user_message) { FactoryGirl.create(:user_message) }
+  describe 'index' do
+    context 'user signed in' do
+      before do
+        sign_in sending_user
+      end
+      it 'should show user messages' do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context 'user not signed in' do
+      it 'should redirect user to sign in page' do
+        get :index
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
   describe '#new' do
     context 'user signed in' do
       before do

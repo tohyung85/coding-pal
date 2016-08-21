@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :enrollments, only: [:create]
     resources :join_requests, only: [:create]
   end
+  resources :user_messages, only: [:index]
   resources :users do
     resources :user_messages, only: [:new, :create, :destroy]
   end

@@ -2,6 +2,6 @@
 
 <%= simple_form_for @user_message, url: user_user_messages_path(@receipient) do |f| %>
   <%= f.input :message_title %>
-  <%= f.input :message_description %>
+  <%= f.input :message_description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'projects'}} %>
   <%= f.submit 'Send', class: 'btn btn-success' %>
 <% end %>

@@ -38,7 +38,7 @@
             <%= message.message_description.html_safe %>
             <div class='member-message_content-inner'></div>
           </div>
-          <p class='member-message_poster'>-<%= message.user.profile.user_name %></p>
+          <p class='member-message_poster'>-<%= link_to message.user.profile.user_name, profile_path(message.user) %></p>
           </br class='clear'>
         </div>
       <% end %>
