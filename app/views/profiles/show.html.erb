@@ -14,6 +14,7 @@
         <p>I am looking to join local groups!</p>
       <% end %>
       <p><%= @profile.description %></p>
+      <%= link_to "Message #{@profile.user_name}", '#', class: 'btn btn-lg btn-success' %>
     </div>
     <div class='user-groups'>
       <% if @profile.user.groups.present? %>
