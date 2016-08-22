@@ -3,6 +3,8 @@ class ProfilesController < ApplicationController
   before_action :require_authorized_for_action, only: [:edit, :update]
   def show
     @profile = user_of_profile.profile
+    @user_message = UserMessage.new
+    @receipient = params[:id]
   end
 
   def edit

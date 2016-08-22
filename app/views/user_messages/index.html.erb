@@ -1,0 +1,132 @@
+<%= javascript_include_tag 'truncate_message' %>
+<%= javascript_include_tag 'new_user_messages' %>
+
+<div class='col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12'>
+  <div class='user-messages-inner'>
+
+    <div class='received-messages'>
+      <h2>Received Messages</h2>
+      </br>
+      <div class='member-group-messages'>
+        <% @received_messages.each do |message| %>
+          <div class='member-message'>
+            <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
+            <div class='member-message_content' data-id=<%= message.id %>>
+              <%= message.message_description.html_safe %>
+              <div class='member-message_content-inner'></div>
+            </div>
+            <p class='member-message_poster'>
+              <%= link_to(profile_path(message.sender)) do %>
+                <%= image_tag(message.sender.profile.avatar, class: 'group-members-image') %> 
+                <%= message.sender.profile.user_name %>
+              <% end %>
+            </p>
+            </br class='clear'>
+            <button type="button" class="messaging-button btn btn-success" data-toggle="modal" data-target="#newMessageModal" data-url="<%= user_user_messages_path(message.sender) %>">
+              Reply
+            </button>
+          </div>
+        <% end %>
+      </div>
+      <div class='pagination-div'>
+        <%= will_paginate @received_messages, param_name: 'received_page' %>
+      </div>
+    </div>
+
+    <div class='sent-messages'>
+      <h2>Sent Messages</h2>
+      </br>
+      <div class='member-group-messages'>
+        <% @sent_messages.each do |message| %>
+          <div class='member-message'>
+            <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
+            <div class='member-message_content' data-id=<%= message.id %>>
+              <%= message.message_description.html_safe %>
+              <div class='member-message_content-inner'></div>
+            </div>
+            <p class='member-message_poster'>Sent to-
+              <%= link_to(profile_path(message.sender)) do %>
+                <%= image_tag(message.sender.profile.avatar, class: 'group-members-image') %> 
+                <%= message.sender.profile.user_name %>
+              <% end %>
+            </p>
+            </br class='clear'>
+            <button type="button" class="messaging-button btn btn-success" data-toggle="modal" data-target="#newMessageModal" data-url="<%= user_user_messages_path(message.sender) %>">
+              Send Another Message
+            </button>            
+          </div>
+        <% end %>
+      </div>
+      <div class='pagination-div'>
+        <%= will_paginate @sent_messages, param_name: 'sent_page' %>
+      </div>
+    </div>
+      
+
+      <!-- Received Message Modals -->
+    <% @received_messages.each do |message| %>
+      <div class="modal fade" id="messageModal-<%= message.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><%= message.message_title %></h4>
+            </div>
+            <div class="modal-body">
+              <%= message.message_description.html_safe %>  
+            </div>
+            <div class="modal-footer">            
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+      
+
+      <!-- Sent Message Modals -->
+    <% @sent_messages.each do |message| %>
+      <div class="modal fade" id="messageModal-<%= message.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel"><%= message.message_title %></h4>
+            </div>
+            <div class="modal-body">
+              <%= message.message_description.html_safe %>  
+            </div>
+            <div class="modal-footer">            
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>    
+
+
+
+        <!-- New Message Modal -->
+    <div class="modal fade" id="newMessageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">New Message</h4>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for UserMessage.new, url: '#' do |f| %>
+              <%= f.input :message_title %>
+              <%= f.input :message_description, as: :ckeditor, input_html: { ckeditor: {toolbar: 'projects'}} %>  
+          </div>
+          <div class="modal-footer">
+            <%= f.submit 'Send', class: 'btn btn-success' %>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>            
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
