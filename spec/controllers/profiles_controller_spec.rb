@@ -4,6 +4,16 @@ RSpec.describe ProfilesController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user) }
   let(:profile) { FactoryGirl.create(:profile) }
+  describe '#index' do
+    context 'user signed in or not' do
+      render_views
+      it 'should show the index page with all user profiles' do
+        get :index
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+
   describe '#show' do
     context 'user signed in or not' do
       render_views

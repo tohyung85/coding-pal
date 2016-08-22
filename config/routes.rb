@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'static_pages#landing_page'
-  resources :profiles, only: [:edit, :show, :update]
+  resources :profiles, only: [:edit, :show, :update, :index]
   resources :join_requests, only: [:destroy] do
     delete '/enroll', to: 'join_requests#enroll'
   end
