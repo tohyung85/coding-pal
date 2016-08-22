@@ -1,6 +1,10 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :require_authorized_for_action, only: [:edit, :update]
+  def index
+    @profiles = Profile.all
+  end
+
   def show
     @profile = user_of_profile.profile
     @user_message = UserMessage.new
