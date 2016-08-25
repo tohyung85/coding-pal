@@ -9,6 +9,10 @@ class ProfilesController < ApplicationController
     @profile = user_of_profile.profile
     @user_message = UserMessage.new
     @receipient = params[:id]
+    if @profile.time_zone.present?
+      timezone = ActiveSupport::TimeZone[@profile.time_zone]
+      @offset = timezone.formatted_offset
+    end    
   end
 
   def edit

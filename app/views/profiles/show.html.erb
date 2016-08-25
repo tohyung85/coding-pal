@@ -7,7 +7,7 @@
     <% end %>
     <br/>
     <div class='user-profile'>
-      <h3>Hi, I am <span class='user-detail'><%= @profile.user_name %></span>, I live in <span class='user-detail'><%= @profile.country_name %></span>. My time zone is currently <span class='user-detail'><%= @profile.time_zone %></span></h3>
+      <h3>Hi, I am <span class='user-detail'><%= @profile.user_name %></span>, I live in <span class='user-detail'><%= @profile.country_name %></span>. My time zone is currently <span class='user-detail'>(GMT<%= @offset %>) <%= @profile.time_zone %></span></h3>
       <% if @profile.remote_ok? %>
         <p>I am happy learn remotely!</p>
       <% else %>
