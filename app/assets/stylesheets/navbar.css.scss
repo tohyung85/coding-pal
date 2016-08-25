@@ -4,7 +4,8 @@ $light-blue : #60C9E7;
 $dark-brown : #605C50;
 $grey : #7E7F81;
 
-nav.navbar.navbar-default {
+nav.navbar.navbar-default {  
+  z-index: 999;
   background-color: $blue;
   color: white;
   border-radius: 0px;
@@ -31,8 +32,6 @@ nav.navbar.navbar-default a {
   font-style: italic;
   font-size: 25px;
 }
-
-
 
 nav.navbar.navbar-default .nav.navbar-nav > .active > a {
   background-color: $blue;
