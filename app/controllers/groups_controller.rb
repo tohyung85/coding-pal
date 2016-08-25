@@ -8,7 +8,7 @@ class GroupsController < ApplicationController
   def show
     if current_group.time_zone.present?
       timezone = ActiveSupport::TimeZone[current_group.time_zone]
-      @offset = timezone.formatted_offset
+      @offset = timezone.formatted_offset if timezone.present?
     end
   end
 

@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
     if @profile.time_zone.present?
       timezone = ActiveSupport::TimeZone[@profile.time_zone]
       @offset = timezone.formatted_offset
-    end    
+    end
   end
 
   def edit
