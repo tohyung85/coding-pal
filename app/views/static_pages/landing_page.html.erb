@@ -1,13 +1,41 @@
-<div class='page-inner-contents'>
-  <div class='page-inner-contents-header'>
-    <h1>Coding Pals</h1>
-    <br/>
-    <p>It's a long and tough journey ahead</p>
-    <p>Don't do it alone</p>
-  </div>  
+<%= javascript_include_tag 'jquery.fullPage.min' %>
+<%= javascript_include_tag 'landing_page' %>
+<div id='fullpage'>
 
-</div>
-<div class='page-contents-description'>
-    <p>No matter what courses or bootcamps you take or what projects you are working on, coding isn't easy</p>
-    <p>Find someone to learn it with</p>
+  <div class='page-inner-contents first-section section'>
+    <div class='page-inner-contents-header page'>
+      <h1>Coding Pals</h1>
+      <br/>
+      <p>No matter what courses you take or what projects you are working on, coding isn't easy</p>
+      <p>Find someone to learn it with</p>    
+      <br/>
+      <%= link_to 'Partner Up Today!', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+    </div>  
+  </div>
+
+  <div class='page-contents-description page section'>
+    <div class='page-inner-contents-header'>
+      <h1> Create or Join a Study Group!</h1>
+      <%= image_tag 'groups_image.png' %>
+    </div>
+  </div>
+
+  <div class='page-contents-individual-group page section'>
+    <div class='page-inner-contents-header'>
+      <h1>Share ideas and set up your meetings</h1>
+      <%= image_tag 'single_group_image.png', class: 'single-group-image' %>
+    </div>
+  </div>
+
+  <div class='page-inner-contents last-section section'>
+    <div class='page-inner-contents-header page'>
+      <h1>Coding Pals</h1>
+      <br/>
+      <p>It's a long and tough journey ahead</p>
+      <p>Don't do it alone</p>
+      <br/>
+      <%= link_to 'Sign Up Today!', new_user_registration_path, class: 'final-sign-up' %>
+    </div>  
+  </div>
+
 </div>
