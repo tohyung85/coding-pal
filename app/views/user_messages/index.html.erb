@@ -12,7 +12,9 @@
           <div class='member-message'>
             <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
             <div class='member-message_content' data-id=<%= message.id %>>
-              <%= message.message_description.html_safe %>
+              <div class='member-message_content_wrapper'>
+                <%= message.message_description.html_safe %>
+              </div>
               <div class='member-message_content-inner'></div>
             </div>
             <p class='member-message_poster'>
@@ -41,7 +43,9 @@
           <div class='member-message'>
             <h4 class='member-message_title'><%= message.message_title%> - <span class='member-message_time'><%= message.created_at.to_time.strftime('%H:%M %B %e %Y')%></span></h4>
             <div class='member-message_content' data-id=<%= message.id %>>
-              <%= message.message_description.html_safe %>
+              <div class='member-message_content_wrapper'>
+                <%= message.message_description.html_safe %>
+              </div>
               <div class='member-message_content-inner'></div>
             </div>
             <p class='member-message_poster'>Sent to-
