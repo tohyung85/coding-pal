@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:facebook, :github]
 
-  has_one :profile, dependent: :destroy 
+  has_one :profile, dependent: :destroy
   has_many :groups, dependent: :destroy
   has_many :enrollments, dependent: :destroy
   has_many :enrolled_groups, through: :enrollments, source: :group
