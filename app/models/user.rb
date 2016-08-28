@@ -5,14 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:facebook, :github]
 
-  has_one :profile
-  has_many :groups
-  has_many :enrollments
+  has_one :profile, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :enrollments, dependent: :destroy
   has_many :enrolled_groups, through: :enrollments, source: :group
-  has_many :join_requests, foreign_key: 'requestor_id'
-  has_many :messages
-  has_many :received_messages, class_name: 'UserMessage', foreign_key: 'receipient_id'
-  has_many :sent_messages, class_name: 'UserMessage', foreign_key: 'sender_id'
+  has_many :join_requests, foreign_key: 'requestor_id', dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :received_messages, class_name: 'UserMessage', foreign_key: 'receipient_id', dependent: :destroy
+  has_many :sent_messages, class_name: 'UserMessage', foreign_key: 'sender_id', dependent: :destroy
   has_many :user_providers, dependent: :destroy
 
   after_create :profile_creation
