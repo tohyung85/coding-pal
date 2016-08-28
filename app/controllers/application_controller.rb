@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
   def record_not_found
     render text: 'record not found', status: :not_found
   end
+
+  def after_sign_in_path_for(*)
+    groups_path
+  end
 end
