@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         omniauth_providers: [:facebook, :github]
 
   has_one :profile
   has_many :groups
@@ -12,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :messages
   has_many :received_messages, class_name: 'UserMessage', foreign_key: 'receipient_id'
   has_many :sent_messages, class_name: 'UserMessage', foreign_key: 'sender_id'
+  has_many :user_providers, dependent: :destroy
 
   after_create :profile_creation
 

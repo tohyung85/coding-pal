@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821014215) do
+ActiveRecord::Schema.define(version: 20160828021918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,16 @@ ActiveRecord::Schema.define(version: 20160821014215) do
 
   add_index "user_messages", ["receipient_id"], name: "index_user_messages_on_receipient_id", using: :btree
   add_index "user_messages", ["sender_id", "receipient_id"], name: "index_user_messages_on_sender_id_and_receipient_id", using: :btree
+
+  create_table "user_providers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_providers", ["user_id"], name: "index_user_providers_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

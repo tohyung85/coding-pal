@@ -38,6 +38,10 @@ gem 'country_select'
 # Devise gem
 gem 'devise', '>= 3.2.4'
 
+# Omniauth
+gem 'omniauth-facebook'
+gem 'omniauth-github'
+
 # Carrierwave gem
 gem 'carrierwave'
 # Carrierwave aws
