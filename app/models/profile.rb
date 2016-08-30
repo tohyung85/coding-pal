@@ -11,6 +11,6 @@ class Profile < ActiveRecord::Base
   end
 
   def send_welcome_email
-    NotificationMailer.welcome_user(user).deliver_now
+    EmailWorker.perform_async(user.id)
   end
 end
