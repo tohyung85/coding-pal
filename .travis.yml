@@ -7,7 +7,9 @@ install:
 script:
 - bundle exec rspec
 - bundle exec rubocop --config .rubocop.yml
-services: "-postgresql"
+services: 
+- postgresql
+- redis-server
 script:
 - bundle exec rake db:test:prepare
 - bundle exec rspec
