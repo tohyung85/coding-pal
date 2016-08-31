@@ -94,6 +94,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-async (0.10.2)
+      devise (>= 3.2, < 4.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -295,6 +297,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   country_select
   devise (>= 3.2.4)
+  devise-async
   factory_girl_rails (~> 4.0)
   figaro
   jbuilder (~> 2.0)

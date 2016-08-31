@@ -42,6 +42,9 @@ gem 'country_select'
 # Devise gem
 gem 'devise', '>= 3.2.4'
 
+# Devise async
+gem 'devise-async'
+
 # Omniauth
 gem 'omniauth-facebook'
 gem 'omniauth-github'
