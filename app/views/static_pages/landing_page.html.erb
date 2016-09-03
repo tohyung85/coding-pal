@@ -1,9 +1,35 @@
 <%= javascript_include_tag 'jquery.fullPage.min' %>
 <%= javascript_include_tag 'landing_page' %>
+
+<button type="button" class="btn btn-default suggestion-box" aria-label="Left Align" data-toggle="modal" data-target="#myModal">
+  <span class="suggestion-box-text glyphicon glyphicon-envelope" aria-hidden="true"></span>
+  <p class='suggestion-box-text suggestion-text'>Suggestions Welcome!</p>
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id='fullpage'>
 
   <div class='page-inner-contents first-section section'>
     <div class='page-inner-contents-header page'>
+
       <h1>Coding Pals</h1>
       <br/>
       <p>No matter what courses you take or what projects you are working on, coding isn't easy</p>
