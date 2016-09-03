@@ -1,0 +1,10 @@
+Hi <%= @receipient.profile.user_name %>!
+
+  <%= @sender.profile.user_name %> has posted a message to <%= @group_message.group.name %>
+
+  "<%= ActionView::Base.full_sanitizer.sanitize(@group_message.message_description) %>"
+
+  Check it out <%= link_to 'here', member_group_url(@group_message.group) %>
+
+Cheers, 
+Coding Pals

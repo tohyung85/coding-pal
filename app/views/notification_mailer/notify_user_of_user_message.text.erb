@@ -1,0 +1,6 @@
+Hi <%= @user_message.receipient.profile.user_name %>!
+  <%= @user_message.sender.profile.user_name %> has sent you a message!p>
+  "<%= ActionView::Base.full_sanitizer.sanitize(@user_message.message_description) %>"
+  Respond to <%= @user_message.sender.profile.user_name %> <%= link_to 'here', user_messages_url(@user_message.receipient) %>
+Cheers, 
+Coding Pals
