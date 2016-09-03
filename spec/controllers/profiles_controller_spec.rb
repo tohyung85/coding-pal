@@ -4,6 +4,8 @@ RSpec.describe ProfilesController, type: :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user) }
   let(:profile) { FactoryGirl.create(:profile) }
+
+  
   describe '#index' do
     context 'user signed in or not' do
       render_views
