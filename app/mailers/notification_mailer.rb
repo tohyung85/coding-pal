@@ -22,4 +22,12 @@ class NotificationMailer < ApplicationMailer
     mail(to: @receipient.email,
          subject: "#{@sender.profile.user_name} has sent you a message!")
   end
+
+  def notify_user_of_join_request(join_request_id)
+    @join_request = JoinRequest.find(join_request_id)
+    @admin = @join_request.group.user
+    @requestor = @join_request.requestor
+    mail(to: @admin.email,
+         subject: "#{@requestor.profile.user_name} has requested to join the group!")
+  end
 end

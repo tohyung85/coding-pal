@@ -1,0 +1,11 @@
+<p>Hi <%= @admin.profile.user_name %>!</p>
+<p>
+  <p><%= @requestor.profile.user_name %> would like to join <%= @join_request.group.name %> </p>
+
+  "<%= ActionView::Base.full_sanitizer.sanitize(@join_request.message) %>"
+
+  <p>Check it out <%= link_to 'here', group_url(@join_request.group) %></p>
+  </p>
+
+Cheers, <br/>
+Coding Pals
