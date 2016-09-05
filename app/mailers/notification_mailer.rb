@@ -30,4 +30,10 @@ class NotificationMailer < ApplicationMailer
     mail(to: @admin.email,
          subject: "#{@requestor.profile.user_name} has requested to join the group!")
   end
+
+  def notify_user_suggestion(suggestion_id)
+    @suggestion = Suggestion.find(suggestion_id)
+    mail(to: 'tantohyung@gmail.com', from: @suggestion.user_email,
+         subject: "#{@suggestion.user_email} has sent feedback")
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828124058) do
+ActiveRecord::Schema.define(version: 20160903090649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,14 @@ ActiveRecord::Schema.define(version: 20160828124058) do
   add_index "profiles", ["country"], name: "index_profiles_on_country", using: :btree
   add_index "profiles", ["time_zone"], name: "index_profiles_on_time_zone", using: :btree
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
+
+  create_table "suggestions", force: :cascade do |t|
+    t.string   "user_email"
+    t.text     "description"
+    t.string   "title"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "user_messages", force: :cascade do |t|
     t.string   "message_title"

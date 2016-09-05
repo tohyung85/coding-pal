@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
   root 'static_pages#landing_page'
+  resources :suggestions, only: [:create]
   resources :profiles, only: [:edit, :show, :update, :index]
   resources :join_requests, only: [:destroy] do
     delete '/enroll', to: 'join_requests#enroll'
